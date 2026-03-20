@@ -61,7 +61,7 @@ export default async function PublicCoursePage({ params }: { params: { courseId:
                                 <h3 className="font-black text-slate-400 text-xs uppercase tracking-widest mb-4">Video Lessons</h3>
                                 {course.lessons.length === 0 ? <p className="text-slate-500 italic font-medium">No lessons available yet.</p> : (
                                     <ul className="space-y-3">
-                                        {course.lessons.map((lesson, idx) => (
+                                        {course.lessons.map((lesson: { id: string; title: string }, idx: number) => (
                                             <li key={lesson.id} className="flex items-center space-x-4 p-5 rounded-2xl bg-slate-50 border border-slate-100 hover:border-indigo-100 hover:bg-white hover:shadow-sm transition-all">
                                                 <div className="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center font-black text-sm shrink-0">{idx + 1}</div>
                                                 <span className="font-bold text-slate-700">{lesson.title}</span>
@@ -75,7 +75,7 @@ export default async function PublicCoursePage({ params }: { params: { courseId:
                                 <h3 className="font-black text-slate-400 text-xs uppercase tracking-widest mb-4">Assessments</h3>
                                 {course.quizzes.length === 0 ? <p className="text-slate-500 italic font-medium">No quizzes available.</p> : (
                                     <ul className="space-y-3">
-                                        {course.quizzes.map((quiz) => (
+                                        {course.quizzes.map((quiz: { id: string; title: string }) => (
                                             <li key={quiz.id} className="flex items-center space-x-4 p-5 rounded-2xl bg-purple-50 border border-purple-100 hover:border-purple-200 transition-all">
                                                 <div className="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center shrink-0">
                                                     <CheckCircle2 className="w-5 h-5 text-purple-600" />
