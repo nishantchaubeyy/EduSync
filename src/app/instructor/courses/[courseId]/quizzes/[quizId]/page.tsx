@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, CheckCircle, HelpCircle } from "lucide-react";
 import { addQuestion } from "@/actions/questions";
-import { SubmitButton } from "../../new/SubmitButton";
+import { SubmitButton } from "@/app/instructor/courses/new/SubmitButton";
 
 export default async function QuizManagerPage({ params }: { params: { courseId: string, quizId: string } }) {
     const session = await getServerSession(authOptions);

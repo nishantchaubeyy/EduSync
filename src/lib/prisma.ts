@@ -6,7 +6,7 @@ const globalForPrisma = global as unknown as { prisma: PrismaClient | undefined 
 
 function makePrisma(): PrismaClient {
     const pool = new Pool({ connectionString: process.env.DATABASE_URL });
-    const adapter = new PrismaPg(pool);
+    const adapter = new PrismaPg(pool as any);
     return new PrismaClient({ adapter });
 }
 
