@@ -23,7 +23,7 @@ export async function markLessonComplete(lessonId: string, courseId: string, nex
             studentId: session.user.id,
             completed: true
         }
-    }).catch(async (e) => {
+    }).catch(async (e: unknown) => {
         // If we can't upsert directly due to missing composite unique, we use manual find then update/create
         const existing = await prisma.progress.findFirst({
             where: { lessonId, studentId: session.user.id }
