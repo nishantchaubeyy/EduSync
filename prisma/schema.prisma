@@ -1,0 +1,90 @@
+generator client {
+  provider   = "prisma-client-js"
+  engineType = "library"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  STUDENT
+  INSTRUCTOR
+  ADMIN
+}
+
+model User {
+  id          String       @id @default(uuid())
+  name        String
+  email       String       @unique
+  password    String       // Hashed
+  role        Role         @default(STUDENT)
+  enrollments Enrollment[]
+  courses     Course[]     // If user is INSTRUCTOR
+  progress    Progress[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model Course {
+  id          String       @id @default(uuid())
+  title       String
+  description String
+  instructor  User         @relation(fields: [instructorId], references: [id])
+  instructorId String
+  lessons     Lesson[]
+  quizzes     Quiz[]
+  enrollments Enrollment[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model Lesson {
+  id          String       @id @default(uuid())
+  title       String
+  videoUrl    String       // URL from S3/Cloudinary
+  order       Int
+  course      Course       @relation(fields: [courseId], references: [id])
+  courseId    String
+  progress    Progress[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model Quiz {
+  id          String       @id @default(uuid())
+  title       String
+  course      Course       @relation(fields: [courseId], references: [id])
+  courseId    String
+  questions   Question[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model Question {
+  id          String       @id @default(uuid())
+  text        String
+  options     String       // Storing as JSON string
+  correct     String       // Correct answer identifier
+  quiz        Quiz         @relation(fields: [quizId], references: [id])
+  quizId      String
+}
+
+model Enrollment {
+  id          String       @id @default(uuid())
+  student     User         @relation(fields: [studentId], references: [id])
+  studentId   String
+  course      Course       @relation(fields: [courseId], references: [id])
+  courseId    String
+  enrolledAt  DateTime     @default(now())
+}
+
+model Progress {
+  id          String       @id @default(uuid())
+  student     User         @relation(fields: [studentId], references: [id])
+  studentId   String
+  lesson      Lesson       @relation(fields: [lessonId], references: [id])
+  lessonId    String
+  completed   Boolean      @default(false)
+  updatedAt   DateTime     @updatedAt
+}
