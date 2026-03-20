@@ -39,7 +39,7 @@ export default async function CoursesPage() {
                 </div>
             ) : (
                 <div className="grid grid-cols-1 gap-4">
-                    {courses.map(course => (
+                    {courses.map((course: any) => (
                         <div key={course.id} className="flex flex-col sm:flex-row items-center border border-slate-200 rounded-xl p-6 bg-white shadow-sm hover:shadow-md transition-shadow group">
                             <div className="w-16 h-16 bg-indigo-50 rounded-lg flex items-center justify-center mr-6 shrink-0 group-hover:bg-indigo-100 transition-colors">
                                 <BookOpen className="w-8 h-8 text-indigo-500" />

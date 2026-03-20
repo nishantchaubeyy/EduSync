@@ -58,7 +58,7 @@ export default async function CourseDetailPage({ params }: { params: { courseId:
                             </div>
                         ) : (
                             <ul className="space-y-3">
-                                {course.lessons.map((lesson, index) => (
+                                {course.lessons.map((lesson: any, index: number) => (
                                     <li key={lesson.id} className="flex items-center justify-between p-4 bg-white border border-slate-100 rounded-2xl hover:border-indigo-200 hover:shadow-sm transition-all group">
                                         <div className="flex items-center space-x-4">
                                             <div className="w-10 h-10 rounded-xl bg-slate-100 text-slate-600 flex items-center justify-center font-black text-sm group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors">
@@ -91,7 +91,7 @@ export default async function CourseDetailPage({ params }: { params: { courseId:
                             </div>
                         ) : (
                             <ul className="space-y-3">
-                                {course.quizzes.map(quiz => (
+                                {course.quizzes.map((quiz: any) => (
                                     <li key={quiz.id} className="flex items-center justify-between p-4 bg-white border border-slate-100 rounded-2xl hover:border-purple-200 hover:shadow-sm transition-all group">
                                         <div className="flex items-center space-x-4">
                                             <div className="w-10 h-10 rounded-xl bg-purple-50 flex items-center justify-center">

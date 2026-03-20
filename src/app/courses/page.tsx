@@ -27,7 +27,7 @@ export default async function CourseCatalogPage() {
                 </div>
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {courses.map(course => (
+                    {courses.map((course: any) => (
                         <Link href={`/courses/${course.id}`} key={course.id} className="group flex flex-col bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl hover:shadow-indigo-500/10 hover:-translate-y-1 transition-all duration-300">
                             <div className="h-56 bg-gradient-to-br from-indigo-500 to-purple-600 relative overflow-hidden flex items-center justify-center">
                                 <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />

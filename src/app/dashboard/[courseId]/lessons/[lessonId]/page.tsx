@@ -26,7 +26,7 @@ export default async function LessonPage({ params }: { params: { courseId: strin
 
     if (!course) return notFound();
 
-    const lesson = course.lessons.find(l => l.id === params.lessonId);
+    const lesson = course.lessons.find((l: any) => l.id === params.lessonId);
     if (!lesson) return notFound();
 
     const progress = await prisma.progress.findFirst({
@@ -35,7 +35,7 @@ export default async function LessonPage({ params }: { params: { courseId: strin
 
     const isCompleted = progress?.completed || false;
 
-    const currentIndex = course.lessons.findIndex(l => l.id === lesson.id);
+    const currentIndex = course.lessons.findIndex((l: any) => l.id === lesson.id);
     const nextLesson = course.lessons[currentIndex + 1];
 
     return (
@@ -82,7 +82,7 @@ export default async function LessonPage({ params }: { params: { courseId: strin
                         <h3 className="font-black text-slate-900 text-lg mb-6">Course Material</h3>
                         <div className="space-y-3">
                             <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Video Lessons</h4>
-                            {course.lessons.map((l, i) => (
+                            {course.lessons.map((l: any, i: number) => (
                                 <Link key={l.id} href={`/dashboard/${course.id}/lessons/${l.id}`} className={`block p-4 rounded-xl transition-all font-bold text-sm ${l.id === lesson.id ? 'bg-indigo-600 text-white shadow-md hover:bg-indigo-700' : 'bg-slate-50 border border-slate-100 text-slate-600 hover:border-indigo-300 hover:text-indigo-600'}`}>
                                     {i + 1}. {l.title}
                                 </Link>
@@ -92,7 +92,7 @@ export default async function LessonPage({ params }: { params: { courseId: strin
                                 <>
                                     <div className="h-px bg-slate-100 my-4" />
                                     <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Assessments</h4>
-                                    {course.quizzes.map((q, i) => (
+                                    {course.quizzes.map((q: any, i: number) => (
                                         <Link key={q.id} href={`/dashboard/${course.id}/quizzes/${q.id}`} className="block p-4 rounded-xl transition-all font-bold text-sm bg-purple-50 text-purple-700 border border-purple-100 hover:bg-purple-100 hover:border-purple-300">
                                             Quiz: {q.title}
                                         </Link>

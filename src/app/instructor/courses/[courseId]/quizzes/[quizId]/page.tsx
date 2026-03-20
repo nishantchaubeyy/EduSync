@@ -43,7 +43,7 @@ export default async function QuizManagerPage({ params }: { params: { courseId: 
                         </div>
                     ) : (
                         <div className="space-y-4">
-                            {quiz.questions.map((q, i) => (
+                            {quiz.questions.map((q: any, i: number) => (
                                 <div key={q.id} className="p-5 border border-slate-200 rounded-2xl bg-white shadow-sm">
                                     <h3 className="font-bold text-slate-800 flex items-start gap-3">
                                         <span className="text-indigo-600">Q{i + 1}.</span> {q.text}
