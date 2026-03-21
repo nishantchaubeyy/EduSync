@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { AnimatedLogo } from "./AnimatedLogo";
 
 const navLinks = [
     { href: "/", label: "Dashboard", exact: true },
@@ -16,13 +17,11 @@ export function Navbar() {
     return (
         <nav className="fixed top-0 z-50 w-full bg-[#fcf8ff] shadow-sm">
             <div className="flex justify-between items-center w-full px-8 py-4 max-w-screen-2xl mx-auto">
-                {/* Logo + University Name */}
+                {/* Logo + Animated University Name */}
                 <div className="flex items-center gap-4">
                     <Link href="/" className="flex items-center gap-4">
                         <img alt="EduSync logo" className="h-12 w-auto" src="/image.png" />
-                        <span className="text-xl font-bold text-primary hidden lg:block">
-                            EduSync
-                        </span>
+                        <AnimatedLogo />
                     </Link>
                 </div>
 
