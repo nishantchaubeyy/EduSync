@@ -15,7 +15,7 @@ export default async function CoursesPage() {
     });
 
     return (
-        <div className="space-y-8 animate-in fade-in duration-500">
+        <div className="space-y-8 animate-in fade-in duration-500 p-4 sm:p-8">
             <div className="flex justify-between items-center border-b border-slate-100 pb-6">
                 <div>
                     <h1 className="text-3xl font-bold text-slate-900">My Courses</h1>

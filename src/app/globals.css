@@ -56,15 +56,18 @@
   --font-label: "Manrope", sans-serif;
 }
 
+/* ───── Material Symbols ───── */
 .material-symbols-outlined {
   font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }
 
+/* ───── Glass Nav ───── */
 .glass-nav {
   backdrop-filter: blur(12px);
   background-color: rgba(252, 248, 255, 0.8);
 }
 
+/* ───── Dark Mode ───── */
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -72,12 +75,18 @@
   }
 }
 
+/* ───── Base ───── */
 body {
   background: var(--color-background);
   color: var(--color-on-surface);
   font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Prevent pull-to-refresh on mobile */
+  overscroll-behavior-y: contain;
 }
 
+/* ───── Scrollbar Hiding ───── */
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -87,14 +96,43 @@ body {
   scrollbar-width: none;
 }
 
+/* ───── Safe Area (for phones with notch / gesture bar) ───── */
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* ───── Touch Improvements ───── */
+@media (hover: none) and (pointer: coarse) {
+
+  /* Larger tap targets on touch devices */
+  button,
+  a,
+  [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Remove hover effects on touch  */
+  .group:hover .group-hover\:opacity-100 {
+    opacity: inherit;
+  }
+}
+
 /* ───── Animated Logo ───── */
 
 .animated-logo-wrapper {
   display: inline-flex;
   align-items: center;
   position: relative;
-  min-width: 100px;
-  height: 40px;
+  min-width: 80px;
+  height: 36px;
+}
+
+@media (min-width: 640px) {
+  .animated-logo-wrapper {
+    min-width: 100px;
+    height: 40px;
+  }
 }
 
 .animated-logo-text {
@@ -103,11 +141,17 @@ body {
   font-family: 'Playfair Display', serif;
   font-style: italic;
   font-weight: 700;
-  font-size: 1.65rem;
+  font-size: 1.35rem;
   line-height: 1;
   letter-spacing: 0.01em;
   white-space: nowrap;
   user-select: none;
+}
+
+@media (min-width: 640px) {
+  .animated-logo-text {
+    font-size: 1.65rem;
+  }
 }
 
 .animated-logo-letter {
@@ -116,4 +160,90 @@ body {
   transform-origin: center bottom;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+}
+
+/* ────────────────────────────────────────
+   MOBILE-SPECIFIC RESPONSIVE OVERRIDES
+   ──────────────────────────────────────── */
+
+/* ── Landing Page Hero ── */
+@media (max-width: 639px) {
+
+  /* Hero section tight spacing */
+  .hero-section,
+  section:first-of-type {
+    min-height: auto !important;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+}
+
+/* ── Smooth scroll on the whole page ── */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* ── Prevent horizontal overflow globally ── */
+body {
+  overflow-x: hidden;
+}
+
+/* ── Better form inputs on mobile ── */
+input,
+textarea,
+select {
+  font-size: 16px !important;
+  /* Prevent iOS zoom on focus */
+}
+
+@media (min-width: 640px) {
+
+  input,
+  textarea,
+  select {
+    font-size: inherit !important;
+  }
+}
+
+/* ── Make images responsive by default ── */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ── Editorial shadow (used in admin) ── */
+.editorial-shadow {
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+}
+
+/* ── Mobile animation helpers ── */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── Small breakpoint (xs) for inline-flex logo text ── */
+@media (min-width: 480px) {
+  .xs\:inline-flex {
+    display: inline-flex !important;
+  }
+}
+
+/* Default hidden (for xs: prefix behavior) */
+.hidden.xs\:inline-flex {
+  display: none;
+}
+
+@media (min-width: 480px) {
+  .hidden.xs\:inline-flex {
+    display: inline-flex;
+  }
 }

@@ -26,50 +26,50 @@ const badges = [
 
 export default function StudentDashboardPage() {
     return (
-        <div className="px-8 py-8">
+        <div className="px-4 sm:px-8 py-6 sm:py-8">
             <div className="max-w-7xl mx-auto">
                 {/* Hero Welcome */}
-                <section className="mb-12">
-                    <div className="relative overflow-hidden rounded-3xl p-10 bg-gradient-to-br from-primary to-primary-container text-white">
+                <section className="mb-8 sm:mb-12">
+                    <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl p-6 sm:p-10 bg-gradient-to-br from-primary to-primary-container text-white">
                         <div className="relative z-10 max-w-2xl">
-                            <h2 className="text-4xl font-extrabold font-headline mb-4 leading-tight">Welcome back, Curator.</h2>
-                            <p className="text-lg opacity-90 font-body mb-8">You have 3 assignments due this week and you&apos;ve completed 85% of your &apos;Art History&apos; module.</p>
-                            <div className="flex gap-4">
-                                <button className="px-6 py-3 bg-secondary text-on-secondary font-semibold rounded-xl hover:bg-opacity-90 transition-all">Resume Last Lesson</button>
-                                <button className="px-6 py-3 bg-white/10 backdrop-blur-md border border-white/20 font-semibold rounded-xl hover:bg-white/20 transition-all">View Schedule</button>
+                            <h2 className="text-2xl sm:text-4xl font-extrabold font-headline mb-3 sm:mb-4 leading-tight">Welcome back, Curator.</h2>
+                            <p className="text-sm sm:text-lg opacity-90 font-body mb-5 sm:mb-8">You have 3 assignments due this week and you&apos;ve completed 85% of your &apos;Art History&apos; module.</p>
+                            <div className="flex flex-col xs:flex-row gap-3 sm:gap-4">
+                                <button className="px-5 sm:px-6 py-2.5 sm:py-3 bg-secondary text-on-secondary font-semibold rounded-xl hover:bg-opacity-90 transition-all text-sm sm:text-base">Resume Last Lesson</button>
+                                <button className="px-5 sm:px-6 py-2.5 sm:py-3 bg-white/10 backdrop-blur-md border border-white/20 font-semibold rounded-xl hover:bg-white/20 transition-all text-sm sm:text-base">View Schedule</button>
                             </div>
                         </div>
-                        <div className="absolute -right-20 -top-20 w-80 h-80 bg-white/5 rounded-full blur-3xl" />
-                        <div className="absolute right-10 bottom-10 opacity-20 transform rotate-12">
-                            <span className="material-symbols-outlined text-[120px]" style={{ fontVariationSettings: "'FILL' 1" }}>auto_stories</span>
+                        <div className="absolute -right-20 -top-20 w-60 sm:w-80 h-60 sm:h-80 bg-white/5 rounded-full blur-3xl" />
+                        <div className="absolute right-4 sm:right-10 bottom-4 sm:bottom-10 opacity-20 transform rotate-12">
+                            <span className="material-symbols-outlined text-[60px] sm:text-[120px]" style={{ fontVariationSettings: "'FILL' 1" }}>auto_stories</span>
                         </div>
                     </div>
                 </section>
 
                 {/* Main Grid */}
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-10">
                     {/* Left Column */}
-                    <div className="lg:col-span-2 space-y-12">
+                    <div className="lg:col-span-2 space-y-8 sm:space-y-12">
                         {/* In-Progress Courses */}
                         <section>
-                            <div className="flex justify-between items-end mb-6">
+                            <div className="flex justify-between items-end mb-4 sm:mb-6">
                                 <div>
-                                    <h3 className="text-xl font-bold font-headline text-primary">In-Progress Courses</h3>
-                                    <p className="text-sm text-outline">Continue where you left off</p>
+                                    <h3 className="text-lg sm:text-xl font-bold font-headline text-primary">In-Progress Courses</h3>
+                                    <p className="text-xs sm:text-sm text-outline">Continue where you left off</p>
                                 </div>
-                                <Link href="/courses" className="text-sm font-bold text-secondary hover:underline">View All</Link>
+                                <Link href="/courses" className="text-xs sm:text-sm font-bold text-secondary hover:underline">View All</Link>
                             </div>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                                 {inProgressCourses.map((course) => (
-                                    <div key={course.id} className="group bg-surface-container-lowest p-5 rounded-2xl shadow-sm hover:shadow-md transition-all border border-transparent hover:border-primary/10">
-                                        <div className="relative mb-5 overflow-hidden rounded-xl aspect-video">
+                                    <div key={course.id} className="group bg-surface-container-lowest p-4 sm:p-5 rounded-2xl shadow-sm hover:shadow-md transition-all border border-transparent hover:border-primary/10">
+                                        <div className="relative mb-4 sm:mb-5 overflow-hidden rounded-xl aspect-video">
                                             <img className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src={course.image} alt={course.title} />
-                                            <div className="absolute top-3 left-3 bg-white/90 backdrop-blur px-3 py-1 rounded-lg text-[10px] font-bold text-primary uppercase tracking-widest">{course.category}</div>
+                                            <div className="absolute top-2 sm:top-3 left-2 sm:left-3 bg-white/90 backdrop-blur px-2.5 sm:px-3 py-1 rounded-lg text-[9px] sm:text-[10px] font-bold text-primary uppercase tracking-widest">{course.category}</div>
                                         </div>
-                                        <h4 className="text-lg font-bold text-primary mb-2 line-clamp-1">{course.title}</h4>
+                                        <h4 className="text-base sm:text-lg font-bold text-primary mb-2 line-clamp-1">{course.title}</h4>
                                         <div className="flex justify-between items-center mb-2">
-                                            <span className="text-xs text-outline font-medium">Progress</span>
-                                            <span className="text-xs font-bold text-secondary">{course.progress}%</span>
+                                            <span className="text-[10px] sm:text-xs text-outline font-medium">Progress</span>
+                                            <span className="text-[10px] sm:text-xs font-bold text-secondary">{course.progress}%</span>
                                         </div>
                                         <div className="w-full h-1.5 bg-secondary-container rounded-full overflow-hidden">
                                             <div className="h-full bg-secondary rounded-full transition-all duration-1000" style={{ width: `${course.progress}%` }} />
@@ -81,31 +81,31 @@ export default function StudentDashboardPage() {
 
                         {/* Recommended */}
                         <section>
-                            <div className="flex justify-between items-end mb-6">
+                            <div className="flex justify-between items-end mb-4 sm:mb-6">
                                 <div>
-                                    <h3 className="text-xl font-bold font-headline text-primary">Recommended for You</h3>
-                                    <p className="text-sm text-outline">Based on your learning history</p>
+                                    <h3 className="text-lg sm:text-xl font-bold font-headline text-primary">Recommended for You</h3>
+                                    <p className="text-xs sm:text-sm text-outline">Based on your learning history</p>
                                 </div>
-                                <div className="flex gap-2">
+                                <div className="hidden sm:flex gap-2">
                                     <button className="p-2 rounded-full bg-surface-container hover:bg-surface-container-high transition-colors"><span className="material-symbols-outlined text-sm">chevron_left</span></button>
                                     <button className="p-2 rounded-full bg-surface-container hover:bg-surface-container-high transition-colors"><span className="material-symbols-outlined text-sm">chevron_right</span></button>
                                 </div>
                             </div>
-                            <div className="flex gap-6 overflow-x-auto hide-scrollbar pb-4 -mx-2 px-2">
+                            <div className="flex gap-4 sm:gap-6 overflow-x-auto hide-scrollbar pb-4 -mx-2 px-2 snap-x snap-mandatory">
                                 {recommended.map((item) => (
-                                    <div key={item.title} className="min-w-[280px] bg-surface-container-low rounded-2xl overflow-hidden group border border-transparent hover:border-outline-variant/30 transition-all">
-                                        <div className="relative h-40">
+                                    <div key={item.title} className="min-w-[240px] sm:min-w-[280px] bg-surface-container-low rounded-2xl overflow-hidden group border border-transparent hover:border-outline-variant/30 transition-all snap-start">
+                                        <div className="relative h-32 sm:h-40">
                                             <img className="w-full h-full object-cover" src={item.image} alt={item.title} />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-4">
-                                                <span className="text-white text-xs font-bold flex items-center gap-1"><span className="material-symbols-outlined text-xs">timer</span> {item.time}</span>
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-3 sm:p-4">
+                                                <span className="text-white text-[10px] sm:text-xs font-bold flex items-center gap-1"><span className="material-symbols-outlined text-xs">timer</span> {item.time}</span>
                                             </div>
                                         </div>
-                                        <div className="p-4">
-                                            <h5 className="font-bold text-primary mb-1">{item.title}</h5>
-                                            <p className="text-xs text-on-surface-variant line-clamp-2 mb-4">{item.desc}</p>
+                                        <div className="p-3 sm:p-4">
+                                            <h5 className="font-bold text-primary mb-1 text-sm sm:text-base">{item.title}</h5>
+                                            <p className="text-[10px] sm:text-xs text-on-surface-variant line-clamp-2 mb-3 sm:mb-4">{item.desc}</p>
                                             <div className="flex items-center justify-between">
                                                 <span className="text-sm font-bold text-primary">{item.price}</span>
-                                                <button className="p-2 bg-primary text-white rounded-lg hover:scale-105 duration-150 transition-transform">
+                                                <button className="p-1.5 sm:p-2 bg-primary text-white rounded-lg hover:scale-105 duration-150 transition-transform">
                                                     <span className="material-symbols-outlined text-sm">add</span>
                                                 </button>
                                             </div>
@@ -117,44 +117,44 @@ export default function StudentDashboardPage() {
                     </div>
 
                     {/* Right Column */}
-                    <div className="lg:col-span-1 space-y-12">
+                    <div className="lg:col-span-1 space-y-8 sm:space-y-12">
                         {/* Deadlines */}
-                        <section className="bg-surface-container-high rounded-3xl p-6">
-                            <div className="flex items-center justify-between mb-6">
-                                <h3 className="text-lg font-bold font-headline text-primary">Deadlines</h3>
-                                <span className="bg-error/10 text-error text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-tighter">Action Required</span>
+                        <section className="bg-surface-container-high rounded-2xl sm:rounded-3xl p-4 sm:p-6">
+                            <div className="flex items-center justify-between mb-4 sm:mb-6">
+                                <h3 className="text-base sm:text-lg font-bold font-headline text-primary">Deadlines</h3>
+                                <span className="bg-error/10 text-error text-[9px] sm:text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-tighter">Action Required</span>
                             </div>
-                            <div className="space-y-4">
+                            <div className="space-y-3 sm:space-y-4">
                                 {deadlines.map((d) => (
-                                    <div key={d.title} className="flex gap-4 p-3 bg-white rounded-xl shadow-sm">
-                                        <div className="w-12 h-12 bg-primary/5 text-primary rounded-lg flex flex-col items-center justify-center">
-                                            <span className="text-[10px] font-bold uppercase">{d.month}</span>
-                                            <span className="text-lg font-bold">{d.day}</span>
+                                    <div key={d.title} className="flex gap-3 sm:gap-4 p-2.5 sm:p-3 bg-white rounded-xl shadow-sm">
+                                        <div className="w-10 sm:w-12 h-10 sm:h-12 bg-primary/5 text-primary rounded-lg flex flex-col items-center justify-center shrink-0">
+                                            <span className="text-[9px] sm:text-[10px] font-bold uppercase">{d.month}</span>
+                                            <span className="text-base sm:text-lg font-bold">{d.day}</span>
                                         </div>
-                                        <div className="flex-1">
-                                            <h5 className="text-sm font-bold text-primary leading-tight">{d.title}</h5>
-                                            <p className="text-[10px] text-outline mt-1 uppercase font-bold tracking-widest">{d.course}</p>
+                                        <div className="flex-1 min-w-0">
+                                            <h5 className="text-xs sm:text-sm font-bold text-primary leading-tight truncate">{d.title}</h5>
+                                            <p className="text-[9px] sm:text-[10px] text-outline mt-1 uppercase font-bold tracking-widest truncate">{d.course}</p>
                                         </div>
-                                        <div className="flex items-center">
-                                            <span className={`material-symbols-outlined text-lg ${d.iconColor}`}>{d.icon}</span>
+                                        <div className="flex items-center shrink-0">
+                                            <span className={`material-symbols-outlined text-base sm:text-lg ${d.iconColor}`}>{d.icon}</span>
                                         </div>
                                     </div>
                                 ))}
                             </div>
-                            <button className="w-full mt-6 py-3 border border-primary/10 text-primary text-xs font-bold rounded-xl hover:bg-white/50 transition-all">Open Calendar</button>
+                            <button className="w-full mt-4 sm:mt-6 py-2.5 sm:py-3 border border-primary/10 text-primary text-xs font-bold rounded-xl hover:bg-white/50 transition-all">Open Calendar</button>
                         </section>
 
                         {/* Achievements */}
                         <section>
-                            <h3 className="text-lg font-bold font-headline text-primary mb-6">Achievements</h3>
-                            <div className="grid grid-cols-2 gap-4">
+                            <h3 className="text-base sm:text-lg font-bold font-headline text-primary mb-4 sm:mb-6">Achievements</h3>
+                            <div className="grid grid-cols-2 gap-3 sm:gap-4">
                                 {badges.map((b) => (
-                                    <div key={b.title} className={`flex flex-col items-center text-center p-4 bg-surface-container-lowest rounded-2xl shadow-sm ${b.locked ? "opacity-50 grayscale" : ""}`}>
-                                        <div className={`w-14 h-14 ${b.bg} ${b.text} rounded-full flex items-center justify-center mb-3`}>
-                                            <span className="material-symbols-outlined text-2xl" style={b.filled ? { fontVariationSettings: "'FILL' 1" } : undefined}>{b.icon}</span>
+                                    <div key={b.title} className={`flex flex-col items-center text-center p-3 sm:p-4 bg-surface-container-lowest rounded-2xl shadow-sm ${b.locked ? "opacity-50 grayscale" : ""}`}>
+                                        <div className={`w-12 sm:w-14 h-12 sm:h-14 ${b.bg} ${b.text} rounded-full flex items-center justify-center mb-2 sm:mb-3`}>
+                                            <span className="material-symbols-outlined text-xl sm:text-2xl" style={b.filled ? { fontVariationSettings: "'FILL' 1" } : undefined}>{b.icon}</span>
                                         </div>
-                                        <h6 className="text-[11px] font-bold text-primary leading-tight">{b.title}</h6>
-                                        <p className="text-[10px] text-outline mt-1">{b.desc}</p>
+                                        <h6 className="text-[10px] sm:text-[11px] font-bold text-primary leading-tight">{b.title}</h6>
+                                        <p className="text-[9px] sm:text-[10px] text-outline mt-0.5 sm:mt-1">{b.desc}</p>
                                     </div>
                                 ))}
                             </div>

@@ -21,7 +21,7 @@ export default async function CourseDetailPage({ params }: { params: { courseId:
     if (!course) return notFound();
 
     return (
-        <div className="space-y-8 animate-in fade-in duration-500">
+        <div className="space-y-8 animate-in fade-in duration-500 p-4 sm:p-8">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-100 pb-6">
                 <div className="flex items-center space-x-4">
                     <Link href="/instructor/courses" className="p-2 border border-slate-200 rounded-full hover:bg-slate-50 transition-colors text-slate-500">

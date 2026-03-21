@@ -319,12 +319,12 @@ export default function DYPIUCourseCatalog() {
     }, []);
 
     return (
-        <section className="py-24">
-            <div className="max-w-screen-2xl mx-auto px-8">
+        <section className="py-12 sm:py-24">
+            <div className="max-w-screen-2xl mx-auto px-4 sm:px-8">
                 {/* Section Header */}
-                <div className="text-center mb-12">
-                    <h2 className="font-headline text-5xl text-primary font-bold mb-4">Curated Programs</h2>
-                    <p className="text-on-surface-variant max-w-2xl mx-auto text-lg">
+                <div className="text-center mb-8 sm:mb-12">
+                    <h2 className="font-headline text-3xl sm:text-5xl text-primary font-bold mb-3 sm:mb-4">Curated Programs</h2>
+                    <p className="text-on-surface-variant max-w-2xl mx-auto text-sm sm:text-lg">
                         Explore {COURSES.length} programs across {ALL_CATEGORIES.length} disciplines — scraped live from{" "}
                         <a href="https://www.dypiu.ac.in" target="_blank" rel="noopener noreferrer" className="text-secondary font-bold hover:underline">
                             dypiu.ac.in
@@ -333,20 +333,20 @@ export default function DYPIUCourseCatalog() {
                 </div>
 
                 {/* Search Bar */}
-                <div className="max-w-xl mx-auto mb-10">
+                <div className="max-w-xl mx-auto mb-6 sm:mb-10">
                     <div className="relative">
-                        <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl">search</span>
+                        <span className="material-symbols-outlined absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 text-slate-400 text-lg sm:text-xl">search</span>
                         <input
                             type="text"
                             placeholder="Search courses, schools, or degrees..."
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            className="w-full pl-12 pr-4 py-4 rounded-xl border border-outline-variant bg-surface-container-lowest text-on-surface font-body placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all"
+                            className="w-full pl-10 sm:pl-12 pr-10 sm:pr-4 py-3 sm:py-4 rounded-xl border border-outline-variant bg-surface-container-lowest text-on-surface font-body placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all text-sm sm:text-base"
                         />
                         {searchQuery && (
                             <button
                                 onClick={() => setSearchQuery("")}
-                                className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                                className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
                             >
                                 <span className="material-symbols-outlined text-lg">close</span>
                             </button>
@@ -354,24 +354,24 @@ export default function DYPIUCourseCatalog() {
                     </div>
                 </div>
 
-                {/* Category Tabs */}
-                <div className="flex flex-wrap justify-center gap-3 mb-12">
+                {/* Category Tabs — horizontally scrollable on mobile */}
+                <div className="flex gap-2 sm:gap-3 mb-8 sm:mb-12 overflow-x-auto hide-scrollbar pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap sm:justify-center">
                     <button
                         onClick={() => setActiveCategory("All")}
-                        className={`px-6 py-2.5 rounded-full font-label text-xs uppercase tracking-widest cursor-pointer transition-all ${activeCategory === "All"
-                                ? "bg-primary text-white shadow-md shadow-primary/20"
-                                : "border border-outline-variant text-on-surface-variant hover:bg-primary hover:text-white"
+                        className={`px-4 sm:px-6 py-2 sm:py-2.5 rounded-full font-label text-[10px] sm:text-xs uppercase tracking-widest cursor-pointer transition-all whitespace-nowrap shrink-0 ${activeCategory === "All"
+                            ? "bg-primary text-white shadow-md shadow-primary/20"
+                            : "border border-outline-variant text-on-surface-variant hover:bg-primary hover:text-white"
                             }`}
                     >
-                        All Programs ({categoryCounts.All})
+                        All ({categoryCounts.All})
                     </button>
                     {ALL_CATEGORIES.map((cat) => (
                         <button
                             key={cat}
                             onClick={() => setActiveCategory(cat)}
-                            className={`px-6 py-2.5 rounded-full font-label text-xs uppercase tracking-widest cursor-pointer transition-all ${activeCategory === cat
-                                    ? "bg-primary text-white shadow-md shadow-primary/20"
-                                    : "border border-outline-variant text-on-surface-variant hover:bg-primary hover:text-white"
+                            className={`px-4 sm:px-6 py-2 sm:py-2.5 rounded-full font-label text-[10px] sm:text-xs uppercase tracking-widest cursor-pointer transition-all whitespace-nowrap shrink-0 ${activeCategory === cat
+                                ? "bg-primary text-white shadow-md shadow-primary/20"
+                                : "border border-outline-variant text-on-surface-variant hover:bg-primary hover:text-white"
                                 }`}
                         >
                             {cat} ({categoryCounts[cat]})
@@ -380,7 +380,7 @@ export default function DYPIUCourseCatalog() {
                 </div>
 
                 {/* Results Count */}
-                <p className="text-sm text-on-surface-variant mb-6 font-medium">
+                <p className="text-xs sm:text-sm text-on-surface-variant mb-4 sm:mb-6 font-medium">
                     Showing <span className="font-bold text-primary">{filteredCourses.length}</span> program{filteredCourses.length !== 1 ? "s" : ""}
                     {searchQuery && <span> matching &ldquo;{searchQuery}&rdquo;</span>}
                 </p>
@@ -393,7 +393,7 @@ export default function DYPIUCourseCatalog() {
                         <p className="text-slate-400">Try a different search term or category filter.</p>
                     </div>
                 ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                         {filteredCourses.map((course) => (
                             <a
                                 key={course.name}
@@ -403,34 +403,34 @@ export default function DYPIUCourseCatalog() {
                                 className="group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden border border-outline-variant/30 hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1 transition-all duration-300"
                             >
                                 {/* Card Header Gradient */}
-                                <div className={`h-32 bg-gradient-to-br ${CATEGORY_GRADIENTS[course.category]} relative flex items-center justify-center overflow-hidden`}>
+                                <div className={`h-24 sm:h-32 bg-gradient-to-br ${CATEGORY_GRADIENTS[course.category]} relative flex items-center justify-center overflow-hidden`}>
                                     <span
-                                        className="material-symbols-outlined text-white/15 text-[100px] absolute group-hover:scale-110 transition-transform duration-500"
+                                        className="material-symbols-outlined text-white/15 text-[60px] sm:text-[100px] absolute group-hover:scale-110 transition-transform duration-500"
                                         style={{ fontVariationSettings: "'FILL' 1" }}
                                     >
                                         {course.icon}
                                     </span>
                                     <div className="relative z-10 text-center">
-                                        <span className="text-white/90 text-xs font-bold uppercase tracking-widest">{course.degree}</span>
-                                        <div className="text-white/60 text-[10px] uppercase tracking-widest mt-1">{course.duration}</div>
+                                        <span className="text-white/90 text-[10px] sm:text-xs font-bold uppercase tracking-widest">{course.degree}</span>
+                                        <div className="text-white/60 text-[9px] sm:text-[10px] uppercase tracking-widest mt-0.5 sm:mt-1">{course.duration}</div>
                                     </div>
                                 </div>
 
                                 {/* Card Body */}
-                                <div className="p-6 flex-1 flex flex-col">
-                                    <div className="flex items-center gap-2 mb-3">
-                                        <span className={`text-[10px] uppercase tracking-widest font-bold px-2.5 py-1 rounded-full border ${CATEGORY_COLORS[course.category]}`}>
+                                <div className="p-4 sm:p-6 flex-1 flex flex-col">
+                                    <div className="flex items-center gap-2 mb-2 sm:mb-3">
+                                        <span className={`text-[9px] sm:text-[10px] uppercase tracking-widest font-bold px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full border ${CATEGORY_COLORS[course.category]}`}>
                                             {course.category}
                                         </span>
                                     </div>
-                                    <h3 className="font-headline text-lg text-primary font-bold mb-2 group-hover:text-primary-container transition-colors leading-snug">
+                                    <h3 className="font-headline text-base sm:text-lg text-primary font-bold mb-1.5 sm:mb-2 group-hover:text-primary-container transition-colors leading-snug">
                                         {course.name}
                                     </h3>
-                                    <p className="text-on-surface-variant text-sm line-clamp-2 mb-4 flex-1">{course.description}</p>
-                                    <div className="flex items-center justify-between pt-4 border-t border-outline-variant/20">
-                                        <span className="text-[11px] text-on-surface-variant font-medium truncate max-w-[200px]">{course.school}</span>
-                                        <span className="text-secondary font-bold text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
-                                            View <span className="material-symbols-outlined text-sm">north_east</span>
+                                    <p className="text-on-surface-variant text-xs sm:text-sm line-clamp-2 mb-3 sm:mb-4 flex-1">{course.description}</p>
+                                    <div className="flex items-center justify-between pt-3 sm:pt-4 border-t border-outline-variant/20">
+                                        <span className="text-[10px] sm:text-[11px] text-on-surface-variant font-medium truncate max-w-[160px] sm:max-w-[200px]">{course.school}</span>
+                                        <span className="text-secondary font-bold text-xs sm:text-sm flex items-center gap-1 group-hover:gap-2 transition-all shrink-0">
+                                            View <span className="material-symbols-outlined text-xs sm:text-sm">north_east</span>
                                         </span>
                                     </div>
                                 </div>
