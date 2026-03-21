@@ -5,7 +5,7 @@ import { SubmitButton } from "./SubmitButton"; // We'll create this to handle pe
 
 export default function NewCoursePage() {
     return (
-        <div className="max-w-3xl mx-auto space-y-8 animate-in fade-in duration-500">
+        <div className="app-shell app-shell--narrow page-stack py-6 sm:py-10 animate-in fade-in duration-500">
             <div className="flex items-center space-x-4">
                 <Link href="/instructor/courses" className="p-2 border border-slate-200 rounded-full hover:bg-slate-50 transition-colors text-slate-500">
                     <ArrowLeft className="w-5 h-5" />
@@ -16,7 +16,7 @@ export default function NewCoursePage() {
                 </div>
             </div>
 
-            <div className="p-8 border border-slate-100 shadow-xl shadow-slate-200/40 rounded-3xl bg-white">
+            <div className="panel-card p-8">
                 <form action={createCourse} className="space-y-6">
                     <div className="space-y-2">
                         <label htmlFor="title" className="block text-sm font-bold text-slate-700">Course Title</label>

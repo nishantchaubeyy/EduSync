@@ -26,8 +26,7 @@ const badges = [
 
 export default function StudentDashboardPage() {
     return (
-        <div className="px-4 sm:px-8 py-6 sm:py-8">
-            <div className="max-w-7xl mx-auto">
+        <div className="dashboard-page">
                 {/* Hero Welcome */}
                 <section className="mb-8 sm:mb-12">
                     <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl p-6 sm:p-10 bg-gradient-to-br from-primary to-primary-container text-white">
@@ -47,7 +46,7 @@ export default function StudentDashboardPage() {
                 </section>
 
                 {/* Main Grid */}
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-10">
+                <div className="content-grid content-grid--sidebar">
                     {/* Left Column */}
                     <div className="lg:col-span-2 space-y-8 sm:space-y-12">
                         {/* In-Progress Courses */}
@@ -161,7 +160,6 @@ export default function StudentDashboardPage() {
                         </section>
                     </div>
                 </div>
-            </div>
         </div>
     );
 }

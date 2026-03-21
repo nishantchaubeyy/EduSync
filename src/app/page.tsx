@@ -5,21 +5,21 @@ export default function LandingPage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative min-h-[500px] lg:min-h-[800px] flex items-center overflow-hidden">
+      <section className="hero-section relative min-h-[500px] lg:min-h-[800px] flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0 bg-gradient-to-r from-primary/10 to-transparent" />
-        <div className="max-w-screen-2xl mx-auto px-4 sm:px-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10 py-8 lg:py-0">
-          <div className="lg:col-span-6">
+        <div className="landing-hero-grid max-w-screen-2xl mx-auto px-4 sm:px-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10 py-8 lg:py-0">
+          <div className="landing-hero-copy lg:col-span-6">
             <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1 rounded-full bg-secondary-container text-on-secondary-fixed-variant font-label text-[10px] sm:text-xs font-bold tracking-widest uppercase mb-4 sm:mb-6">
               <span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>auto_awesome</span>
               Excellence in Education
             </div>
-            <h1 className="font-headline text-primary text-4xl sm:text-5xl md:text-6xl lg:text-8xl leading-[1.1] mb-5 sm:mb-8 font-extrabold">
+            <h1 className="landing-hero-title font-headline text-primary text-4xl sm:text-5xl md:text-6xl lg:text-8xl leading-[1.1] mb-5 sm:mb-8 font-extrabold">
               The Digital <br /> <span className="text-tertiary">Curator</span> of Higher Learning.
             </h1>
-            <p className="font-body text-on-surface-variant text-base sm:text-lg max-w-xl mb-6 sm:mb-10 leading-relaxed">
+            <p className="landing-hero-lead font-body text-on-surface-variant text-base sm:text-lg max-w-xl mb-6 sm:mb-10 leading-relaxed">
               Navigate the future of academia with EduSync. We curate the intellectual journey of tomorrow&apos;s leaders through intentional, industry-aligned learning pathways.
             </p>
-            <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
+            <div className="landing-hero-actions flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
               <Link href="#programs" className="bg-primary hover:bg-primary-container text-white px-6 sm:px-10 py-3 sm:py-4 rounded-xl font-bold transition-all flex items-center justify-center gap-2 shadow-lg shadow-primary/20 text-sm sm:text-base">
                 Explore Curriculum
                 <span className="material-symbols-outlined">arrow_forward</span>
@@ -29,9 +29,9 @@ export default function LandingPage() {
               </Link>
             </div>
           </div>
-          <div className="lg:col-span-6 relative group mt-4 lg:mt-0">
+          <div className="landing-hero-media lg:col-span-6 relative group mt-4 lg:mt-0">
             <div className="absolute -inset-4 bg-tertiary-fixed opacity-20 blur-3xl rounded-full group-hover:opacity-30 transition-opacity" />
-            <div className="relative rounded-xl overflow-hidden shadow-2xl transition-all duration-700 aspect-video bg-white flex items-center justify-center">
+            <div className="landing-hero-frame relative rounded-xl overflow-hidden shadow-2xl transition-all duration-700 aspect-video bg-white flex items-center justify-center">
               <img alt="EduSync Campus" className="w-full h-full object-cover" src="/campus.png" />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent" />
             </div>

@@ -1,0 +1,123 @@
+:root {
+  --nav-height: 4rem;
+  --nav-offset: 5.25rem;
+  --mobile-nav-height: 4.75rem;
+}
+
+.app-nav-logo {
+  height: 2.7rem;
+  max-width: 100%;
+}
+
+.app-nav-inner {
+  padding-block: 0.65rem;
+}
+
+.app-nav-mobile-brand {
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.app-nav-mobile-logo-wrap {
+  flex: 0 1 auto;
+  max-width: 44%;
+}
+
+.app-nav-mobile-wordmark {
+  flex: 0 1 auto;
+  max-width: 38%;
+  justify-content: flex-start;
+  padding-right: 0.35rem;
+  transform: scale(1.02);
+  transform-origin: left center;
+}
+
+.app-nav-actions {
+  gap: 0.5rem;
+}
+
+.app-nav-icon-button {
+  padding: 0.35rem;
+}
+
+.app-nav-avatar {
+  width: 2.15rem;
+  height: 2.15rem;
+}
+
+.app-nav-menu-button {
+  padding: 0.4rem;
+  border: 1px solid rgba(55, 65, 154, 0.16);
+  border-radius: 0.8rem;
+}
+
+.app-main {
+  padding-top: var(--nav-offset);
+  padding-bottom: calc(var(--mobile-nav-height) + env(safe-area-inset-bottom, 0px) + 0.75rem);
+}
+
+.hero-section {
+  min-height: auto;
+  padding-top: 1rem;
+  padding-bottom: 1.75rem;
+}
+
+.landing-hero-grid {
+  gap: 1.5rem;
+  padding-top: 0.75rem;
+}
+
+.landing-hero-title {
+  font-size: clamp(2.65rem, 13vw, 3.75rem);
+  line-height: 0.98;
+  margin-bottom: 0.85rem;
+}
+
+.landing-hero-lead {
+  margin-bottom: 1rem;
+}
+
+.landing-hero-actions {
+  gap: 0.65rem;
+}
+
+.landing-hero-media {
+  margin-top: 1.5rem;
+}
+
+.landing-hero-frame {
+  min-height: 13.5rem;
+  border-radius: 1.2rem;
+}
+
+.page-header {
+  align-items: stretch;
+}
+
+.page-actions {
+  width: 100%;
+}
+
+.page-actions > * {
+  flex: 1 1 10rem;
+}
+
+.dashboard-page {
+  padding-bottom: 6.5rem;
+}
+
+.mobile-bottom-nav {
+  min-height: var(--mobile-nav-height);
+}
+
+.panel-card {
+  border-radius: 1.25rem;
+}
+
+input,
+textarea,
+select {
+  font-size: 16px;
+}

@@ -12,15 +12,15 @@ const assignments = [
 
 export default function InstructorDashboardPage() {
     return (
-        <div className="p-4 sm:p-8 min-h-screen">
+        <div className="dashboard-page min-h-screen">
             {/* Hero Section */}
             <section className="mb-8 sm:mb-10">
-                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-4 sm:mb-6 gap-4">
-                    <div>
+                <div className="page-header mb-4 sm:mb-6">
+                    <div className="page-header-copy">
                         <h1 className="text-2xl sm:text-4xl font-extrabold text-on-surface font-headline tracking-tight mb-1 sm:mb-2">Instructor Dashboard</h1>
                         <p className="text-on-surface-variant max-w-2xl leading-relaxed text-sm sm:text-base">Welcome back, Professor. Here&apos;s the editorial overview of your academic workspace and student performance metrics.</p>
                     </div>
-                    <div className="flex gap-2 sm:gap-3 w-full sm:w-auto">
+                    <div className="page-actions">
                         <button className="flex-1 sm:flex-none px-4 sm:px-5 py-2.5 bg-surface-container-highest text-on-surface font-semibold rounded-md flex items-center justify-center gap-2 hover:bg-surface-container-high transition-colors text-sm">
                             <span className="material-symbols-outlined text-[20px]">download</span><span className="hidden sm:inline">Export Report</span><span className="sm:hidden">Export</span>
                         </button>
@@ -40,7 +40,7 @@ export default function InstructorDashboardPage() {
             </section>
 
             {/* Dynamic Content */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-10">
+            <div className="content-grid content-grid--sidebar">
                 {/* Main (2/3) */}
                 <div className="lg:col-span-2 space-y-8 sm:space-y-10">
                     {/* Enrollment Graph */}

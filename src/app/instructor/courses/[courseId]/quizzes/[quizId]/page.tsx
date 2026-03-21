@@ -21,7 +21,7 @@ export default async function QuizManagerPage({ params }: { params: { courseId: 
     const addQuestionWithQuizId = addQuestion.bind(null, quiz.id);
 
     return (
-        <div className="space-y-8 animate-in fade-in duration-500 p-4 sm:p-8">
+        <div className="dashboard-page animate-in fade-in duration-500">
             <div className="flex items-center space-x-4 border-b border-slate-100 pb-6">
                 <Link href={`/instructor/courses/${params.courseId}`} className="p-2 border border-slate-200 rounded-full hover:bg-slate-50 transition-colors text-slate-500">
                     <ArrowLeft className="w-5 h-5" />
@@ -32,7 +32,7 @@ export default async function QuizManagerPage({ params }: { params: { courseId: 
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="content-grid lg:grid-cols-2">
                 {/* Added Questions List */}
                 <section className="space-y-4">
                     <h2 className="text-xl font-bold text-slate-800">Existing Questions ({quiz.questions.length})</h2>
@@ -62,7 +62,7 @@ export default async function QuizManagerPage({ params }: { params: { courseId: 
                 </section>
 
                 {/* Add Question Form */}
-                <section className="p-6 md:p-8 bg-white border border-slate-100 rounded-3xl shadow-xl shadow-slate-200/40 h-fit">
+                <section className="panel-card p-6 md:p-8 h-fit">
                     <h2 className="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
                         <HelpCircle className="w-5 h-5 text-indigo-500" />
                         Add New Question

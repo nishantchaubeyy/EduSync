@@ -13,15 +13,14 @@ const approvals = [
 
 export default function AdminDashboardPage() {
     return (
-        <div className="p-4 sm:p-8 min-h-screen">
-            <div className="max-w-7xl mx-auto">
+        <div className="dashboard-page min-h-screen">
                 {/* Header */}
-                <div className="mb-8 sm:mb-10 flex flex-col gap-4 sm:gap-6">
-                    <div>
+                <div className="page-header mb-8 sm:mb-10">
+                    <div className="page-header-copy">
                         <h1 className="text-2xl sm:text-4xl font-extrabold text-on-surface font-headline tracking-tight mb-1 sm:mb-2">Institutional Overview</h1>
                         <p className="text-on-surface-variant text-sm sm:text-lg max-w-2xl">Manage the Academic Atelier&apos;s ecosystem and monitor curriculum health.</p>
                     </div>
-                    <div className="flex gap-2 sm:gap-3">
+                    <div className="page-actions">
                         <button className="flex-1 sm:flex-none px-4 sm:px-6 py-2.5 sm:py-3 bg-surface-container-lowest text-primary font-bold rounded-md shadow-sm border border-outline-variant/10 hover:bg-white transition-all flex items-center justify-center gap-2 text-xs sm:text-sm">
                             <span className="material-symbols-outlined text-[18px] sm:text-lg">verified_user</span><span className="hidden sm:inline">Course </span>Approvals
                         </button>
@@ -85,7 +84,7 @@ export default function AdminDashboardPage() {
                 </div>
 
                 {/* Content Split */}
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-10">
+                <div className="content-grid content-grid--sidebar">
                     {/* Recent Registrations */}
                     <div className="lg:col-span-2">
                         <div className="flex items-center justify-between mb-4 sm:mb-6">
@@ -192,7 +191,6 @@ export default function AdminDashboardPage() {
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
     );
 }
