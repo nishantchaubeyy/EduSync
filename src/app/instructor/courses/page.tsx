@@ -15,9 +15,9 @@ export default async function CoursesPage() {
     });
 
     return (
-        <div className="space-y-8 animate-in fade-in duration-500 p-4 sm:p-8">
-            <div className="flex justify-between items-center border-b border-slate-100 pb-6">
-                <div>
+        <div className="dashboard-page animate-in fade-in duration-500">
+            <div className="page-header border-b border-slate-100 pb-6">
+                <div className="page-header-copy">
                     <h1 className="text-3xl font-bold text-slate-900">My Courses</h1>
                     <p className="text-slate-500 mt-2">Manage all the courses you have created.</p>
                 </div>

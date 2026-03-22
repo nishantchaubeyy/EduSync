@@ -30,10 +30,10 @@ export default async function PublicCoursePage({ params }: { params: { courseId:
     }
 
     return (
-        <div className="min-h-screen bg-slate-50 pb-20 animate-in fade-in duration-700">
+        <div className="min-h-screen bg-slate-50 pb-16 sm:pb-20 animate-in fade-in duration-700">
             {/* Hero Section */}
             <div className="bg-slate-900 text-white py-20 px-4 sm:px-6 lg:px-8 border-b-8 border-indigo-600">
-                <div className="max-w-5xl mx-auto space-y-6">
+                <div className="app-shell app-shell--content page-stack !px-0">
                     <div className="inline-flex items-center space-x-2 bg-indigo-500/20 text-indigo-300 px-3 py-1.5 rounded-full text-xs font-black uppercase tracking-widest">
                         <span>By {course.instructor.name || "Expert Instructor"}</span>
                     </div>
@@ -49,12 +49,12 @@ export default async function PublicCoursePage({ params }: { params: { courseId:
             </div>
 
             {/* Main Content Area */}
-            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10">
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="app-shell app-shell--content -mt-10">
+                <div className="content-grid content-grid--feature">
 
                     {/* Main Info */}
                     <div className="lg:col-span-2 space-y-8">
-                        <div className="bg-white rounded-3xl shadow-xl shadow-slate-200/50 p-8 md:p-10 border border-slate-100 relative z-10">
+                        <div className="panel-card rounded-3xl p-8 md:p-10 relative z-10">
                             <h2 className="text-3xl font-extrabold text-slate-900 mb-8 tracking-tight">Course Syllabus</h2>
 
                             <div className="space-y-4">
@@ -91,7 +91,7 @@ export default async function PublicCoursePage({ params }: { params: { courseId:
 
                     {/* Sticky Sidebar Action Card */}
                     <div className="lg:col-span-1 relative">
-                        <div className="sticky top-24 bg-white rounded-3xl shadow-2xl shadow-indigo-500/10 p-8 border border-slate-100 max-lg:hidden">
+                        <div className="panel-card sticky-panel rounded-3xl p-8 max-lg:hidden">
                             <div className="aspect-video bg-slate-900 overflow-hidden rounded-2xl mb-8 flex items-center justify-center border-4 border-white shadow-lg relative -mt-16 group">
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                                 <PlayCircle className="w-16 h-16 text-white drop-shadow-md group-hover:scale-110 transition-transform duration-300" />
@@ -116,7 +116,7 @@ export default async function PublicCoursePage({ params }: { params: { courseId:
                         </div>
 
                         {/* Mobile Enrollment CTA Container (visible only on small screens) */}
-                        <div className="lg:hidden mt-8">
+                        <div className="panel-card lg:hidden mt-8 p-5 sm:p-6">
                             {isEnrolled ? (
                                 <Link href={`/dashboard`} className="flex items-center justify-center w-full bg-emerald-600 text-white py-4 rounded-xl font-bold text-lg hover:bg-emerald-700 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5">
                                     Go to Dashboard

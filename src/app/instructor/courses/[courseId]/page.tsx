@@ -21,9 +21,9 @@ export default async function CourseDetailPage({ params }: { params: { courseId:
     if (!course) return notFound();
 
     return (
-        <div className="space-y-8 animate-in fade-in duration-500 p-4 sm:p-8">
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-100 pb-6">
-                <div className="flex items-center space-x-4">
+        <div className="dashboard-page animate-in fade-in duration-500">
+            <div className="page-header border-b border-slate-100 pb-6">
+                <div className="page-header-copy flex items-center space-x-4">
                     <Link href="/instructor/courses" className="p-2 border border-slate-200 rounded-full hover:bg-slate-50 transition-colors text-slate-500">
                         <ArrowLeft className="w-5 h-5" />
                     </Link>
@@ -32,7 +32,7 @@ export default async function CourseDetailPage({ params }: { params: { courseId:
                         <p className="text-slate-500 mt-1 text-sm font-medium">{course._count.enrollments} Students Enrolled</p>
                     </div>
                 </div>
-                <div className="flex space-x-3 w-full sm:w-auto">
+                <div className="page-actions">
                     <Link href={`/instructor/courses/${course.id}/settings`} className="w-full sm:w-auto px-5 py-2.5 bg-white border border-slate-200 text-slate-700 rounded-xl hover:bg-slate-50 transition-all font-semibold flex items-center justify-center space-x-2 shadow-sm">
                         <Settings className="w-4 h-4" />
                         <span>Course Settings</span>
@@ -40,10 +40,10 @@ export default async function CourseDetailPage({ params }: { params: { courseId:
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="content-grid content-grid--feature">
                 <div className="lg:col-span-2 space-y-8">
                     {/* Lessons Section */}
-                    <section className="bg-white border text-left border-slate-200/60 rounded-3xl p-6 md:p-8 shadow-sm">
+                    <section className="panel-card text-left p-6 md:p-8">
                         <div className="flex justify-between items-center mb-6">
                             <h2 className="text-xl font-extrabold text-slate-800 tracking-tight">Curriculum Lessons</h2>
                             <Link href={`/instructor/courses/${course.id}/lessons/new`} className="text-indigo-700 bg-indigo-50 hover:bg-indigo-100 px-4 py-2 rounded-xl text-sm font-bold flex items-center space-x-2 transition-colors">
@@ -76,7 +76,7 @@ export default async function CourseDetailPage({ params }: { params: { courseId:
                     </section>
 
                     {/* Quizzes Section */}
-                    <section className="bg-white border text-left border-slate-200/60 rounded-3xl p-6 md:p-8 shadow-sm">
+                    <section className="panel-card text-left p-6 md:p-8">
                         <div className="flex justify-between items-center mb-6">
                             <h2 className="text-xl font-extrabold text-slate-800 tracking-tight">Quizzes & Assessments</h2>
                             <Link href={`/instructor/courses/${course.id}/quizzes/new`} className="text-purple-700 bg-purple-50 hover:bg-purple-100 px-4 py-2 rounded-xl text-sm font-bold flex items-center space-x-2 transition-colors">
@@ -111,7 +111,7 @@ export default async function CourseDetailPage({ params }: { params: { courseId:
 
                 {/* Sidebar Info */}
                 <aside className="space-y-6">
-                    <div className="p-8 bg-white border border-slate-200/60 rounded-3xl shadow-sm">
+                    <div className="panel-card p-8">
                         <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-4">Course Details</h3>
                         <p className="text-slate-600 text-sm font-medium leading-relaxed mb-6">{course.description || "No description given."}</p>
                         <div className="h-px w-full bg-slate-100 mb-6" />

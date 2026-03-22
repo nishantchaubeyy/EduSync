@@ -39,8 +39,8 @@ export default async function LessonPage({ params }: { params: { courseId: strin
     const nextLesson = course.lessons[currentIndex + 1];
 
     return (
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-in fade-in duration-500">
-            <div className="flex flex-col lg:flex-row gap-8">
+        <div className="app-shell app-shell--wide page-stack py-8 animate-in fade-in duration-500">
+            <div className="content-grid content-grid--lesson">
 
                 {/* Main Content Video Area */}
                 <div className="lg:col-span-3 lg:flex-1 space-y-6">
@@ -59,7 +59,7 @@ export default async function LessonPage({ params }: { params: { courseId: strin
                         </video>
                     </div>
 
-                    <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+                    <div className="panel-card p-6 sm:p-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
                         <div>
                             <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">{lesson.title}</h1>
                             <p className="text-slate-500 font-medium mt-1 uppercase tracking-wider text-xs">{course.title}</p>
@@ -78,7 +78,7 @@ export default async function LessonPage({ params }: { params: { courseId: strin
 
                 {/* Sidebar Navigation Context */}
                 <div className="lg:w-80 shrink-0 space-y-6">
-                    <div className="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm sticky top-24">
+                    <div className="panel-card p-6 sticky-panel">
                         <h3 className="font-black text-slate-900 text-lg mb-6">Course Material</h3>
                         <div className="space-y-3">
                             <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Video Lessons</h4>

@@ -11,7 +11,7 @@ export default async function CourseCatalogPage() {
     }
 
     return (
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
+        <div className="app-shell app-shell--wide page-stack py-12 sm:py-14 animate-in fade-in slide-in-from-bottom-4 duration-700">
             <div className="text-center max-w-3xl mx-auto space-y-4">
                 <h1 className="text-4xl md:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
                     Explore the <span className="text-indigo-600">Premium Catalog</span>

@@ -1,8 +1,12 @@
 @import "tailwindcss";
+@import "./mobile.css" screen and (max-width: 639px);
+@import "./desktop.css" screen and (min-width: 640px);
 
 :root {
   --background: #fcf8ff;
   --foreground: #1b1b21;
+  --nav-height: 4.5rem;
+  --nav-offset: 5.5rem;
 }
 
 @theme inline {
@@ -50,24 +54,20 @@
   --color-error: #ba1a1a;
   --color-surface: #fcf8ff;
   --color-surface-container-lowest: #ffffff;
-
   --font-headline: "Manrope", sans-serif;
   --font-body: "Manrope", sans-serif;
   --font-label: "Manrope", sans-serif;
 }
 
-/* ───── Material Symbols ───── */
 .material-symbols-outlined {
-  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
 }
 
-/* ───── Glass Nav ───── */
 .glass-nav {
   backdrop-filter: blur(12px);
   background-color: rgba(252, 248, 255, 0.8);
 }
 
-/* ───── Dark Mode ───── */
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -75,18 +75,134 @@
   }
 }
 
-/* ───── Base ───── */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   background: var(--color-background);
   color: var(--color-on-surface);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* Prevent pull-to-refresh on mobile */
   overscroll-behavior-y: contain;
+  overflow-x: hidden;
 }
 
-/* ───── Scrollbar Hiding ───── */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+.app-main {
+  width: 100%;
+  padding-top: var(--nav-offset);
+}
+
+.app-nav {
+  height: var(--nav-height);
+}
+
+.app-nav-inner {
+  min-height: var(--nav-height);
+}
+
+.app-nav-logo {
+  height: 3rem;
+}
+
+.app-shell {
+  width: min(100%, 100rem);
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+.app-shell--wide {
+  max-width: 80rem;
+}
+
+.app-shell--content {
+  max-width: 72rem;
+}
+
+.app-shell--narrow {
+  max-width: 52rem;
+}
+
+.page-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.page-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.page-header-copy {
+  flex: 1 1 18rem;
+  min-width: 0;
+}
+
+.page-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.dashboard-page {
+  width: min(100%, 80rem);
+  margin-inline: auto;
+  padding: 1rem 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.content-grid {
+  display: grid;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.content-grid--feature,
+.content-grid--sidebar,
+.content-grid--lesson {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.panel-card {
+  border-radius: 1.5rem;
+  border: 1px solid rgba(119, 118, 131, 0.14);
+  background: var(--color-surface-container-lowest);
+  box-shadow: 0 18px 40px rgba(55, 65, 154, 0.06);
+}
+
+.panel-card--soft {
+  background: var(--color-surface-container-low);
+}
+
+.sticky-panel {
+  position: sticky;
+  top: 6rem;
+}
+
+.hero-section {
+  padding-top: 1.5rem;
+}
+
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -96,15 +212,15 @@ body {
   scrollbar-width: none;
 }
 
-/* ───── Safe Area (for phones with notch / gesture bar) ───── */
 .safe-area-bottom {
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
-/* ───── Touch Improvements ───── */
-@media (hover: none) and (pointer: coarse) {
+.editorial-shadow {
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+}
 
-  /* Larger tap targets on touch devices */
+@media (hover: none) and (pointer: coarse) {
   button,
   a,
   [role="button"] {
@@ -112,13 +228,10 @@ body {
     min-width: 44px;
   }
 
-  /* Remove hover effects on touch  */
   .group:hover .group-hover\:opacity-100 {
     opacity: inherit;
   }
 }
-
-/* ───── Animated Logo ───── */
 
 .animated-logo-wrapper {
   display: inline-flex;
@@ -138,7 +251,7 @@ body {
 .animated-logo-text {
   display: inline-flex;
   align-items: baseline;
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
   font-style: italic;
   font-weight: 700;
   font-size: 1.35rem;
@@ -162,64 +275,7 @@ body {
   -webkit-backface-visibility: hidden;
 }
 
-/* ────────────────────────────────────────
-   MOBILE-SPECIFIC RESPONSIVE OVERRIDES
-   ──────────────────────────────────────── */
-
-/* ── Landing Page Hero ── */
-@media (max-width: 639px) {
-
-  /* Hero section tight spacing */
-  .hero-section,
-  section:first-of-type {
-    min-height: auto !important;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-  }
-}
-
-/* ── Smooth scroll on the whole page ── */
-html {
-  scroll-behavior: smooth;
-  -webkit-text-size-adjust: 100%;
-}
-
-/* ── Prevent horizontal overflow globally ── */
-body {
-  overflow-x: hidden;
-}
-
-/* ── Better form inputs on mobile ── */
-input,
-textarea,
-select {
-  font-size: 16px !important;
-  /* Prevent iOS zoom on focus */
-}
-
-@media (min-width: 640px) {
-
-  input,
-  textarea,
-  select {
-    font-size: inherit !important;
-  }
-}
-
-/* ── Make images responsive by default ── */
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-/* ── Editorial shadow (used in admin) ── */
-.editorial-shadow {
-  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-}
-
-/* ── Mobile animation helpers ── */
 @media (prefers-reduced-motion: reduce) {
-
   *,
   *::before,
   *::after {
@@ -230,14 +286,12 @@ img {
   }
 }
 
-/* ── Small breakpoint (xs) for inline-flex logo text ── */
 @media (min-width: 480px) {
   .xs\:inline-flex {
     display: inline-flex !important;
   }
 }
 
-/* Default hidden (for xs: prefix behavior) */
 .hidden.xs\:inline-flex {
   display: none;
 }

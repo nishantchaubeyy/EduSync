@@ -2,144 +2,76 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
 import { AnimatedLogo } from "./AnimatedLogo";
 import { SignInButton, UserButton, useAuth } from "@clerk/nextjs";
-
-const navLinks = [
-    { href: "/", label: "Dashboard", exact: true },
-    { href: "/courses", label: "Courses" },
-    { href: "/dashboard", label: "Resources" },
-    { href: "/instructor", label: "Faculty" },
-];
+import { appNavLinks } from "./app-nav-links";
 
 export function Navbar() {
     const pathname = usePathname();
-    const [mobileOpen, setMobileOpen] = useState(false);
     const { userId, isLoaded } = useAuth();
 
-    // Close mobile menu on route change
-    useEffect(() => {
-        setMobileOpen(false);
-    }, [pathname]);
-
-    // Prevent body scroll when mobile menu open
-    useEffect(() => {
-        if (mobileOpen) {
-            document.body.style.overflow = "hidden";
-        } else {
-            document.body.style.overflow = "";
-        }
-        return () => { document.body.style.overflow = ""; };
-    }, [mobileOpen]);
-
     return (
-        <>
-            <nav className="fixed top-0 z-50 w-full bg-[#fcf8ff] shadow-sm">
-                <div className="flex justify-between items-center w-full px-4 sm:px-8 py-3 sm:py-4 max-w-screen-2xl mx-auto">
-                    {/* Logo + Animated University Name */}
-                    <div className="flex items-center gap-3 sm:gap-4 min-w-0">
-                        <Link href="/" className="flex items-center gap-3 sm:gap-4 min-w-0">
-                            <img alt="EduSync logo" className="h-9 sm:h-12 w-auto shrink-0" src="/image.png" />
-                            <span className="hidden xs:inline-flex"><AnimatedLogo /></span>
-                        </Link>
-                    </div>
+        <nav className="app-nav fixed top-0 z-50 w-full bg-[#fcf8ff] shadow-sm">
+            <div className="app-nav-inner app-shell app-shell--wide flex items-center justify-between w-full lg:hidden">
+                <Link href="/" className="app-nav-mobile-brand flex items-center min-w-0">
+                    <span className="app-nav-mobile-logo-wrap flex min-w-0 items-center">
+                        <img alt="EduSync logo" className="app-nav-logo w-auto shrink-0 object-contain block" src="/image.png" />
+                    </span>
+                    <span className="app-nav-mobile-wordmark inline-flex min-w-0 items-center justify-end"><AnimatedLogo /></span>
+                </Link>
+            </div>
 
-                    {/* Center Nav Links (desktop only) */}
-                    <div className="hidden lg:flex items-center gap-12">
-                        {navLinks.map((link) => {
-                            const isActive = link.exact
-                                ? pathname === link.href
-                                : pathname.startsWith(link.href);
-                            return (
-                                <Link
-                                    key={link.label}
-                                    href={link.href}
-                                    className={`text-sm uppercase tracking-widest transition-colors duration-300 ${isActive
-                                        ? "text-primary border-b-2 border-tertiary pb-1 font-bold"
-                                        : "text-slate-600 hover:text-primary"
-                                        }`}
-                                >
-                                    {link.label}
-                                </Link>
-                            );
-                        })}
-                    </div>
-
-                    {/* Right Actions */}
-                    <div className="flex items-center gap-2 sm:gap-6">
-                        <button className="text-slate-600 hover:bg-slate-100 p-2 rounded-full transition-all">
-                            <span className="material-symbols-outlined text-[20px] sm:text-[24px]">notifications</span>
-                        </button>
-                        <button className="hidden sm:block text-slate-600 hover:bg-slate-100 p-2 rounded-full transition-all">
-                            <span className="material-symbols-outlined">settings</span>
-                        </button>
-
-                        {isLoaded && userId ? (
-                            <div className="flex items-center justify-center h-8 w-8 sm:h-10 sm:w-10">
-                                <UserButton />
-                            </div>
-                        ) : isLoaded && !userId ? (
-                            <SignInButton mode="modal">
-                                <button className="bg-primary text-white text-xs sm:text-sm font-bold uppercase tracking-widest px-4 py-2 rounded-lg hover:bg-primary-container hover:text-on-primary-container transition-all">
-                                    Sign In
-                                </button>
-                            </SignInButton>
-                        ) : null}
-
-                        {/* Hamburger (mobile/tablet) */}
-                        <button
-                            onClick={() => setMobileOpen(!mobileOpen)}
-                            className="lg:hidden p-2 -mr-2 text-slate-600 hover:bg-slate-100 rounded-lg transition-colors"
-                            aria-label="Toggle menu"
-                        >
-                            <span className="material-symbols-outlined text-[24px]">
-                                {mobileOpen ? "close" : "menu"}
-                            </span>
-                        </button>
-                    </div>
+            <div className="app-nav-inner app-shell app-shell--wide hidden lg:flex justify-between items-center w-full">
+                {/* Logo + Animated University Name */}
+                <div className="flex items-center gap-3 sm:gap-4 min-w-0">
+                    <Link href="/" className="flex items-center gap-3 sm:gap-4 min-w-0">
+                        <img alt="EduSync logo" className="app-nav-logo w-auto shrink-0 object-contain block" src="/image.png" />
+                        <span className="hidden xs:inline-flex"><AnimatedLogo /></span>
+                    </Link>
                 </div>
-            </nav>
 
-            {/* Mobile Menu Overlay */}
-            {mobileOpen && (
-                <div className="fixed inset-0 z-40 lg:hidden">
-                    {/* Backdrop */}
-                    <div
-                        className="absolute inset-0 bg-black/30 backdrop-blur-sm"
-                        onClick={() => setMobileOpen(false)}
-                    />
-                    {/* Slide-down panel */}
-                    <div className="absolute top-[60px] sm:top-[72px] left-0 right-0 bg-[#fcf8ff] shadow-xl border-t border-slate-100 animate-in slide-in-from-top-2 duration-200">
-                        <div className="flex flex-col p-4 gap-1">
-                            {navLinks.map((link) => {
-                                const isActive = link.exact
-                                    ? pathname === link.href
-                                    : pathname.startsWith(link.href);
-                                return (
-                                    <Link
-                                        key={link.label}
-                                        href={link.href}
-                                        onClick={() => setMobileOpen(false)}
-                                        className={`flex items-center gap-3 px-4 py-3.5 rounded-xl text-sm font-semibold uppercase tracking-widest transition-all ${isActive
-                                            ? "bg-primary/10 text-primary"
-                                            : "text-slate-600 hover:bg-slate-50"
-                                            }`}
-                                    >
-                                        {link.label}
-                                    </Link>
-                                );
-                            })}
-                        </div>
-                        <div className="px-4 pb-4 pt-2 border-t border-slate-100">
-                            <div className="flex items-center gap-3 px-4 py-3 text-slate-500">
-                                <span className="material-symbols-outlined text-[20px]">settings</span>
-                                <span className="text-sm font-medium">Settings</span>
-                            </div>
-                        </div>
-                    </div>
+                {/* Center Nav Links (desktop only) */}
+                <div className="flex items-center gap-12">
+                    {appNavLinks.map((link) => {
+                        const isActive = link.exact
+                            ? pathname === link.href
+                            : pathname.startsWith(link.href);
+                        return (
+                            <Link
+                                key={link.label}
+                                href={link.href}
+                                className={`text-sm uppercase tracking-widest transition-colors duration-300 ${isActive
+                                    ? "text-primary border-b-2 border-tertiary pb-1 font-bold"
+                                    : "text-slate-600 hover:text-primary"
+                                    }`}
+                            >
+                                {link.label}
+                            </Link>
+                        );
+                    })}
                 </div>
-            )}
-        </>
+
+                {/* Right Actions */}
+                <div className="app-nav-actions flex items-center gap-2 sm:gap-6">
+                    <button className="app-nav-icon-button text-slate-600 hover:bg-slate-100 p-2 rounded-full transition-all">
+                        <span className="material-symbols-outlined text-[20px] sm:text-[24px]">notifications</span>
+                    </button>
+                    <button className="app-nav-icon-button text-slate-600 hover:bg-slate-100 p-2 rounded-full transition-all">
+                        <span className="material-symbols-outlined">settings</span>
+                    </button>
+                    {isLoaded && userId ? (
+                        <div className="flex items-center justify-center h-8 w-8 sm:h-10 sm:w-10">
+                            <UserButton />
+                        </div>
+                    ) : isLoaded && !userId ? (
+                        <SignInButton mode="modal">
+                            <button className="bg-primary text-white text-xs sm:text-sm font-bold uppercase tracking-widest px-4 py-2 rounded-lg hover:bg-primary-container hover:text-on-primary-container transition-all">
+                                Sign In
+                            </button>
+                        </SignInButton>
+                    ) : null}
+                </div >
+            </div >
+        </nav >
     );
 }

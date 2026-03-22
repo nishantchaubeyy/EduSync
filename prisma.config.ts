@@ -9,6 +9,7 @@ export default defineConfig({
     path: "prisma/migrations",
   },
   datasource: {
-    url: process.env["DATABASE_URL"],
+    // Allow client generation before local secrets are configured.
+    url: process.env["DATABASE_URL"] ?? "postgresql://postgres:postgres@localhost:5432/edusync",
   },
 });
