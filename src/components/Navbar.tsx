@@ -11,83 +11,84 @@ export function Navbar() {
     const { userId, isLoaded } = useAuth();
 
     return (
-        <nav className="app-nav fixed top-0 z-50 w-full bg-[#fcf8ff] shadow-sm">
-            {/* Mobile Header Box */}
-            <div className="app-nav-inner app-shell app-shell--wide flex items-center justify-between w-full lg:hidden">
-                <Link href="/" className="app-nav-mobile-brand flex items-center min-w-0">
-                    <span className="app-nav-mobile-logo-wrap flex min-w-0 items-center">
-                        <img alt="EduSync logo" className="app-nav-logo w-auto shrink-0 object-contain block" src="/image.png" />
-                    </span>
-                    <span className="app-nav-mobile-wordmark inline-flex min-w-0 items-center justify-end"><AnimatedLogo /></span>
-                </Link>
-            </div>
+        <nav className="fixed top-0 left-0 right-0 z-[100] h-[72px] bg-white border-b border-slate-100 shadow-sm flex items-center">
+            <div className="w-full max-w-screen-2xl mx-auto px-4 flex items-center justify-between gap-4">
 
-            {/* Mobile Auth Strip (Appears below header, taking no horizontal header space) */}
-            <div className="w-full lg:hidden flex justify-end items-center px-4 py-1.5 bg-surface-container-lowest border-t border-outline-variant/30">
-                {isLoaded && userId ? (
-                    <div className="flex items-center justify-center h-6 w-6">
-                        <UserButton />
-                    </div>
-                ) : isLoaded && !userId ? (
-                    <SignInButton mode="modal">
-                        <button className="text-primary text-[10px] sm:text-xs font-bold uppercase tracking-widest hover:underline transition-all flex items-center gap-1">
-                            Sign In <span className="material-symbols-outlined text-[12px]">login</span>
-                        </button>
-                    </SignInButton>
-                ) : null}
-            </div>
-
-            <div className="app-nav-inner app-shell app-shell--wide hidden lg:flex justify-between items-center w-full">
-                {/* Logo + Animated University Name */}
-                <div className="flex items-center gap-3 sm:gap-4 min-w-0">
-                    <Link href="/" className="flex items-center gap-3 sm:gap-4 min-w-0">
-                        <img alt="EduSync logo" className="app-nav-logo w-auto shrink-0 object-contain block" src="/image.png" />
-                        <span className="hidden xs:inline-flex"><AnimatedLogo /></span>
+                {/* ─── Left Section: Logo + Text ─── */}
+                <div className="flex items-center gap-2 shrink-0">
+                    <Link href="/" className="flex items-center gap-3 group">
+                        <img
+                            alt="DY Patil International University Logo"
+                            style={{ height: '36px', width: 'auto', objectFit: 'contain' }}
+                            className="shrink-0 transition-transform duration-300 group-hover:scale-105"
+                            src="/image.png"
+                        />
+                        <div className="h-8 w-[1px] bg-slate-200 mx-1 hidden sm:block" />
+                        <div className="flex items-center scale-90 origin-left">
+                            <AnimatedLogo />
+                        </div>
                     </Link>
                 </div>
 
-                {/* Center Nav Links (desktop only) */}
-                <div className="flex items-center gap-12">
-                    {appNavLinks.map((link) => {
-                        const isActive = link.exact
-                            ? pathname === link.href
-                            : pathname.startsWith(link.href);
-                        return (
-                            <Link
-                                key={link.label}
-                                href={link.href}
-                                className={`text-sm uppercase tracking-widest transition-colors duration-300 ${isActive
-                                    ? "text-primary border-b-2 border-tertiary pb-1 font-bold"
-                                    : "text-slate-600 hover:text-primary"
-                                    }`}
-                            >
-                                {link.label}
-                            </Link>
-                        );
-                    })}
+                {/* ─── Center Section: Navigation Pill ─── */}
+                <div className="hidden lg:flex items-center shrink-0">
+                    <div className="flex items-center bg-slate-50/50 border border-slate-200/50 rounded-full px-1.5 py-1 gap-0.5 shadow-inner backdrop-blur-sm">
+                        {appNavLinks.map((link) => {
+                            const isActive = link.exact
+                                ? pathname === link.href
+                                : pathname.startsWith(link.href);
+                            return (
+                                <Link
+                                    key={link.label}
+                                    href={link.href}
+                                    className={`
+                                        px-4 py-2 rounded-full font-bold text-[11px] xl:text-xs tracking-wide transition-all duration-200
+                                        ${isActive
+                                            ? "text-primary bg-white shadow-sm ring-1 ring-slate-200/50"
+                                            : "text-slate-500 hover:text-primary hover:bg-white/60"
+                                        }
+                                    `}
+                                >
+                                    {link.label}
+                                </Link>
+                            );
+                        })}
+                    </div>
                 </div>
 
-                {/* Right Actions */}
-                <div className="app-nav-actions flex items-center gap-2 sm:gap-6">
-                    <button className="app-nav-icon-button text-slate-600 hover:bg-slate-100 p-2 rounded-full transition-all">
-                        <span className="material-symbols-outlined text-[20px] sm:text-[24px]">notifications</span>
+                {/* ─── Right Section: Icons + Auth ─── */}
+                <div className="flex items-center gap-4 shrink-0">
+                    {/* Icons */}
+                    <div className="flex items-center gap-3 pr-2 border-r border-slate-100">
+                        <button className="text-slate-400 hover:text-primary transition-all duration-200">
+                            <span className="material-symbols-outlined text-[22px]">notifications</span>
+                        </button>
+                        <button className="text-slate-400 hover:text-primary transition-all duration-200">
+                            <span className="material-symbols-outlined text-[20px]">settings</span>
+                        </button>
+                    </div>
+
+                    {/* Sign In / Profile */}
+                    <div className="flex items-center min-w-[120px] justify-end">
+                        {isLoaded && userId ? (
+                            <UserButton appearance={{ elements: { userButtonAvatarBox: "h-9 w-9 shadow-sm" } }} />
+                        ) : isLoaded && !userId ? (
+                            <SignInButton mode="modal">
+                                <button className="bg-black text-white px-6 py-2.5 rounded-[4px] border border-black transition-all duration-200 hover:text-black hover:-translate-x-1 hover:-translate-y-1 hover:bg-[#90d1ff] hover:shadow-[4px_4px_0px_#000] active:translate-x-0 active:translate-y-0 active:shadow-none font-bold uppercase tracking-widest text-[11px] sm:text-xs">
+                                    SIGN IN :)
+                                </button>
+                            </SignInButton>
+                        ) : (
+                            <div className="w-24 h-9 bg-slate-50 rounded-[4px] animate-pulse" />
+                        )}
+                    </div>
+
+                    {/* Mobile Menu Icon */}
+                    <button className="lg:hidden p-1 text-slate-800">
+                        <span className="material-symbols-outlined text-[26px]">menu</span>
                     </button>
-                    <button className="app-nav-icon-button text-slate-600 hover:bg-slate-100 p-2 rounded-full transition-all">
-                        <span className="material-symbols-outlined">settings</span>
-                    </button>
-                    {isLoaded && userId ? (
-                        <div className="flex items-center justify-center h-8 w-8 sm:h-10 sm:w-10">
-                            <UserButton />
-                        </div>
-                    ) : isLoaded && !userId ? (
-                        <SignInButton mode="modal">
-                            <button className="bg-primary text-white text-xs sm:text-sm font-bold uppercase tracking-widest px-4 py-2 rounded-lg hover:bg-primary-container hover:text-on-primary-container transition-all">
-                                Sign In
-                            </button>
-                        </SignInButton>
-                    ) : null}
-                </div >
-            </div >
-        </nav >
+                </div>
+            </div>
+        </nav>
     );
 }

@@ -358,19 +358,19 @@ export default function DYPIUCourseCatalog() {
 
                 {/* Search Bar */}
                 <div className="max-w-xl mx-auto mb-6 sm:mb-10">
-                    <div className="relative">
-                        <span className="material-symbols-outlined absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 text-slate-400 text-lg sm:text-xl">search</span>
+                    <div className="relative group">
+                        <span className="material-symbols-outlined absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 text-slate-400 text-lg sm:text-xl pointer-events-none z-10 transition-colors group-focus-within:text-primary">search</span>
                         <input
                             type="text"
                             placeholder="Search courses, schools, or degrees..."
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            className="w-full pl-10 sm:pl-12 pr-10 sm:pr-4 py-3 sm:py-4 rounded-xl border border-outline-variant bg-surface-container-lowest text-on-surface font-body placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all text-sm sm:text-base"
+                            className="w-full pl-10 sm:pl-12 pr-10 sm:pr-12 py-3 sm:py-4 rounded-xl border border-outline-variant bg-surface-container-lowest text-on-surface font-body placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all text-sm sm:text-base relative z-0 shadow-sm"
                         />
                         {searchQuery && (
                             <button
                                 onClick={() => setSearchQuery("")}
-                                className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                                className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-primary z-10 p-1 rounded-full hover:bg-slate-100 transition-colors"
                             >
                                 <span className="material-symbols-outlined text-lg">close</span>
                             </button>
@@ -418,13 +418,13 @@ export default function DYPIUCourseCatalog() {
                     </div>
                 ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                        {filteredCourses.map((course) => (
+                        {filteredCourses.map((course, idx) => (
                             <a
-                                key={course.name}
+                                key={`${course.name}-${idx}`}
                                 href={course.link}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden border border-outline-variant/30 hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1 transition-all duration-300"
+                                target={course.link.startsWith("http") ? "_blank" : "_self"}
+                                rel={course.link.startsWith("http") ? "noopener noreferrer" : undefined}
+                                className="group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden border border-outline-variant/30 hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1 transition-all duration-300 shadow-sm"
                             >
                                 {/* Card Header Gradient */}
                                 <div className={`h-24 sm:h-32 bg-gradient-to-br ${CATEGORY_GRADIENTS[course.category]} relative flex items-center justify-center overflow-hidden`}>

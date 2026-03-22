@@ -9,7 +9,10 @@ function usesSectionNavigation(pathname: string): boolean {
   return (
     pathname.startsWith("/dashboard") ||
     pathname.startsWith("/instructor") ||
-    pathname.startsWith("/admin")
+    pathname.startsWith("/admin") ||
+    pathname.startsWith("/resources") ||
+    pathname.startsWith("/sign-in") ||
+    pathname.startsWith("/sign-up")
   );
 }
 

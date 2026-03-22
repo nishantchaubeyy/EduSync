@@ -5,200 +5,218 @@ export default function LandingPage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="hero-section relative min-h-[500px] lg:min-h-[800px] flex items-center overflow-hidden">
-        <div className="absolute inset-0 z-0 bg-gradient-to-r from-primary/10 to-transparent" />
-        <div className="landing-hero-grid max-w-screen-2xl mx-auto px-4 sm:px-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10 py-8 lg:py-0">
-          <div className="landing-hero-copy lg:col-span-6">
-            <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1 rounded-full bg-secondary-container text-on-secondary-fixed-variant font-label text-[10px] sm:text-xs font-bold tracking-widest uppercase mb-4 sm:mb-6">
-              <span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>auto_awesome</span>
-              Excellence in Education
+      <section className="relative min-h-[600px] lg:min-h-[850px] flex items-center overflow-hidden bg-slate-950">
+        {/* Background Image with Overlay */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src="/campus.png"
+            alt="EduSync Campus"
+            className="w-full h-full object-cover opacity-80 contrast-[1.1] brightness-[0.85]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-950/50 to-transparent" />
+        </div>
+
+        <div className="max-w-screen-2xl mx-auto px-4 sm:px-8 w-full relative z-10 py-16 lg:py-24">
+          <div className="max-w-5xl">
+            {/* Badge */}
+            <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-[#B6F09C] text-[#003d2b] font-bold text-[10px] sm:text-xs tracking-[0.2em] uppercase mb-8 sm:mb-12 shadow-sm border border-[#94d578]/30">
+              Established Excellence
             </div>
-            <h1 className="landing-hero-title font-headline text-primary text-4xl sm:text-5xl md:text-6xl lg:text-8xl leading-[1.1] mb-5 sm:mb-8 font-extrabold">
-              The Digital <br /> <span className="text-tertiary">Curator</span> of Higher Learning.
+
+            {/* Heading */}
+            <h1 className="text-white text-5xl sm:text-7xl lg:text-[110px] font-bold leading-[0.92] mb-8 sm:mb-12 tracking-tight">
+              The Digital <br />
+              Curator of <span className="italic font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>Higher</span> <br />
+              <span className="italic font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>Learning.</span>
             </h1>
-            <p className="landing-hero-lead font-body text-on-surface-variant text-base sm:text-lg max-w-xl mb-6 sm:mb-10 leading-relaxed">
-              Navigate the future of academia with EduSync. We curate the intellectual journey of tomorrow&apos;s leaders through intentional, industry-aligned learning pathways.
+
+            {/* Lead */}
+            <p className="font-body text-white/80 text-base sm:text-lg md:text-xl lg:text-2xl max-w-2xl mb-12 sm:mb-16 leading-relaxed font-medium">
+              A premium workspace for the modern scholar. Synchronizing tradition with innovation to curate the leaders of tomorrow.
             </p>
-            <div className="landing-hero-actions flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
-              <Link href="#programs" className="bg-primary hover:bg-primary-container text-white px-6 sm:px-10 py-3 sm:py-4 rounded-xl font-bold transition-all flex items-center justify-center gap-2 shadow-lg shadow-primary/20 text-sm sm:text-base">
-                Explore Curriculum
-                <span className="material-symbols-outlined">arrow_forward</span>
+
+            {/* Actions */}
+            <div className="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-6">
+              <Link href="#programs" className="bg-[#1F7A3E] hover:bg-[#165a2d] text-white px-8 sm:px-12 py-4 sm:py-5 rounded-xl font-bold transition-all flex items-center justify-center gap-3 shadow-2xl shadow-green-950/40 text-sm sm:text-base border border-white/10 group">
+                Explore Programs
+                <span className="material-symbols-outlined text-xl group-hover:translate-x-1 transition-transform">arrow_forward</span>
               </Link>
-              <Link href="/login" className="px-6 sm:px-10 py-3 sm:py-4 font-bold text-primary hover:bg-surface-container-low rounded-xl transition-all text-center text-sm sm:text-base">
-                Institutional Access
+              <Link href="/login" className="bg-[#0f172a]/60 backdrop-blur-md hover:bg-[#0f172a]/80 text-white px-8 sm:px-12 py-4 sm:py-5 rounded-xl font-bold transition-all text-center text-sm sm:text-base border border-white/10">
+                Virtual Campus Tour
               </Link>
-            </div>
-          </div>
-          <div className="landing-hero-media lg:col-span-6 relative group mt-4 lg:mt-0">
-            <div className="absolute -inset-4 bg-tertiary-fixed opacity-20 blur-3xl rounded-full group-hover:opacity-30 transition-opacity" />
-            <div className="landing-hero-frame relative rounded-xl overflow-hidden shadow-2xl transition-all duration-700 aspect-video bg-white flex items-center justify-center">
-              <img alt="EduSync Campus" className="w-full h-full object-cover" src="/campus.png" />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent" />
-            </div>
-            {/* Quote Overlay — hidden on small screens */}
-            <div className="hidden sm:block absolute bottom-6 -left-6 max-w-xs bg-surface-container-highest p-4 sm:p-6 rounded-xl shadow-xl border-l-4 border-secondary backdrop-blur-sm">
-              <span className="material-symbols-outlined text-secondary mb-2" style={{ fontVariationSettings: "'FILL' 1" }}>format_quote</span>
-              <p className="font-headline font-bold text-base sm:text-lg text-primary leading-tight">&ldquo;Education is the most powerful weapon which you can use to change the world.&rdquo;</p>
-              <p className="mt-3 sm:mt-4 font-label text-[10px] uppercase tracking-widest text-on-surface-variant">&mdash; EduSync Academic Insight</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* University Highlights */}
-      <section className="py-12 sm:py-24 bg-[#f4f6f9]">
-        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8">
+      <section className="py-24 sm:py-32 relative overflow-hidden bg-white">
+        {/* Background Decorative Elements - Soft & Airy */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-40">
+          <div className="absolute top-[-10%] left-[-10%] w-[600px] h-[600px] bg-blue-50 rounded-full blur-[120px]" />
+          <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-teal-50 rounded-full blur-[100px]" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-[0.05]"
+            style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, #0B3C6F 1px, transparent 0)', backgroundSize: '40px 40px' }} />
+        </div>
 
-          {/* Section Header + About */}
-          <div className="mb-10 sm:mb-16">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-1 h-8 bg-[#1F7A3E] rounded-full" />
-              <span className="text-[12px] text-[#1F7A3E] uppercase tracking-[0.2em] font-bold">About Our University</span>
+        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 relative z-10">
+          {/* Section Header */}
+          <div className="mb-20 sm:mb-28">
+            <div className="flex items-center gap-4 mb-6 group">
+              <div className="w-12 h-1.5 bg-gradient-to-r from-[#1F7A3E] to-teal-500 rounded-full group-hover:w-20 transition-all duration-700" />
+              <span className="text-xs sm:text-sm text-[#1F7A3E] uppercase tracking-[0.4em] font-extrabold">Excellence & Heritage</span>
             </div>
-            <h2 className="font-headline text-3xl sm:text-4xl md:text-[44px] text-[#0B3C6F] font-bold leading-tight mb-4 sm:mb-6">
-              University Highlights
+
+            <h2 className="font-headline text-4xl sm:text-5xl md:text-7xl text-[#0B3C6F] font-black leading-tight mb-10 tracking-tight">
+              University <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-teal-600 to-emerald-600">Highlights</span>
             </h2>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-8">
-              <p className="text-[#4a5568] text-[14px] sm:text-[15px] leading-[1.8]">
-                D Y Patil International University (DYPIU), Akurdi, Pune, has swiftly emerged as one of India&apos;s leading centers for academic excellence and innovation. Established in 2018 and recognized by the UGC and Government of Maharashtra, DYPIU is known for its world-class academic offerings across engineering, management, design, biotechnology, media, and liberal arts.
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20">
+              <p className="text-[#4a5568] text-base sm:text-lg md:text-xl leading-relaxed font-semibold opacity-90">
+                D Y Patil International University (DYPIU), Akurdi, Pune, has swiftly emerged as one of India&apos;s leading centers for academic excellence and innovation. Established in 2018 and recognized by the UGC and Government of Maharashtra, DYPIU is known for its world-class academic offerings.
               </p>
-              <p className="text-[#4a5568] text-[14px] sm:text-[15px] leading-[1.8]">
-                At DYPIU, learners benefit from state-of-the-art infrastructure, inspiring mentorship, and opportunities for hands-on training and real-world problem-solving right from their first year. Widely recognized for its experiential learning model, DYPIU is consistently ranked among the top private universities in Pune and Maharashtra.
+              <p className="text-[#718096] text-base sm:text-lg leading-relaxed">
+                At DYPIU, learners benefit from state-of-the-art infrastructure, inspiring mentorship, and opportunities for hands-on training and real-world problem-solving right from their first year. Widely recognized for its experiential learning model, DYPIU is consistently ranked among the top private universities.
               </p>
             </div>
           </div>
 
-          {/* Quick Stats Row */}
-          <div className="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 mb-10 sm:mb-14">
+          {/* Dynamic Stats Section */}
+          <div className="grid grid-cols-2 lg:grid-cols-6 gap-4 sm:gap-6 mb-24 sm:mb-36">
             {[
-              { stat: "2018", label: "Established", icon: "calendar_today" },
-              { stat: "UGC", label: "Recognized", icon: "verified" },
-              { stat: "8", label: "Schools", icon: "account_balance" },
-              { stat: "25+", label: "Programs", icon: "menu_book" },
-              { stat: "200+", label: "Faculty", icon: "groups" },
-              { stat: "98%", label: "Placements", icon: "trending_up" },
+              { stat: "2018", label: "Established", icon: "calendar_today", bg: "bg-blue-50", text: "text-blue-600", border: "border-blue-100" },
+              { stat: "UGC", label: "Recognized", icon: "verified", bg: "bg-teal-50", text: "text-teal-600", border: "border-teal-100" },
+              { stat: "8", label: "Schools", icon: "account_balance", bg: "bg-purple-50", text: "text-purple-600", border: "border-purple-100" },
+              { stat: "25+", label: "Programs", icon: "menu_book", bg: "bg-orange-50", text: "text-orange-600", border: "border-orange-100" },
+              { stat: "200+", label: "Faculty", icon: "groups", bg: "bg-blue-50", text: "text-blue-600", border: "border-blue-100" },
+              { stat: "98%", label: "Placements", icon: "trending_up", bg: "bg-emerald-50", text: "text-emerald-600", border: "border-emerald-100" },
             ].map((item) => (
-              <div key={item.label} className="bg-white rounded-xl sm:rounded-2xl p-3 sm:p-5 text-center shadow-[0_1px_12px_rgba(11,60,111,0.05)] border border-[#edf0f4] hover:shadow-[0_3px_20px_rgba(11,60,111,0.10)] transition-shadow duration-300">
-                <span className="material-symbols-outlined text-[16px] sm:text-[20px] text-[#0B3C6F]/40 mb-1 sm:mb-2 block">{item.icon}</span>
-                <div className="text-[18px] sm:text-[24px] md:text-[28px] font-headline font-bold text-[#0B3C6F]">{item.stat}</div>
-                <p className="text-[9px] sm:text-[11px] text-[#8a95a3] uppercase tracking-wider font-medium mt-0.5 sm:mt-1">{item.label}</p>
+              <div key={item.label} className={`group relative ${item.bg} rounded-[2rem] p-8 text-center border-2 ${item.border} hover:shadow-2xl hover:shadow-gray-200 hover:-translate-y-2 transition-all duration-500`}>
+                <div className={`w-10 h-10 ${item.bg} rounded-full flex items-center justify-center mx-auto mb-4 border ${item.border} shadow-sm group-hover:scale-110 transition-transform`}>
+                  <span className={`material-symbols-outlined text-lg ${item.text}`}>{item.icon}</span>
+                </div>
+                <div className={`text-3xl sm:text-4xl font-headline font-black ${item.text} mb-2`}>{item.stat}</div>
+                <p className="text-[10px] text-gray-500 uppercase tracking-widest font-bold">{item.label}</p>
               </div>
             ))}
           </div>
 
-          {/* Highlights Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
-
-            {/* Large Card — Academic Excellence */}
-            <div className="lg:row-span-2 bg-white rounded-2xl p-6 sm:p-8 md:p-10 shadow-[0_2px_20px_rgba(11,60,111,0.06)] border border-[#e8ecf1] flex flex-col justify-between group hover:shadow-[0_4px_32px_rgba(11,60,111,0.10)] transition-shadow duration-300">
-              <div>
-                <div className="w-12 sm:w-14 h-12 sm:h-14 rounded-xl bg-[#EBF4FF] flex items-center justify-center mb-4 sm:mb-6">
-                  <span className="material-symbols-outlined text-[24px] sm:text-[28px] text-[#0B3C6F]">school</span>
+          {/* Highlights Cards Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
+            {/* Academic Excellence Card (Light Blue Tint) */}
+            <div className="lg:row-span-2 group relative bg-[#f4faff] rounded-[3rem] p-10 sm:p-14 border border-blue-100 shadow-[0_20px_50px_rgba(55,65,154,0.05)] hover:shadow-[0_30px_70px_rgba(55,65,154,0.1)] transition-all duration-700 flex flex-col justify-between overflow-hidden">
+              <div className="absolute -top-32 -right-32 w-80 h-80 bg-blue-400/5 rounded-full blur-[80px]" />
+              <div className="relative z-10">
+                <div className="w-20 h-20 rounded-3xl bg-white flex items-center justify-center mb-10 border border-blue-100 shadow-xl shadow-blue-900/10">
+                  <span className="material-symbols-outlined text-4xl text-blue-600" style={{ fontVariationSettings: "'FILL' 1" }}>school</span>
                 </div>
-                <h3 className="font-headline text-xl sm:text-2xl md:text-[26px] text-[#0B3C6F] font-bold mb-2 sm:mb-3 leading-snug">
-                  Academic Excellence
-                </h3>
-                <p className="text-[#5a6a7a] text-[14px] sm:text-[15px] leading-relaxed mb-4 sm:mb-5">
-                  DYPIU offers world-class programs across 8 schools — from B.Tech in Computer Science and Semiconductor Engineering to MBA Digital Business and BFA Applied Arts. The university develops future-ready professionals through a rigorous, modern curriculum and a dynamic learning environment.
+                <h3 className="font-headline text-3xl sm:text-4xl text-[#0B3C6F] font-bold mb-8 leading-tight">Academic <br />Excellence</h3>
+                <p className="text-[#5a6a7a] text-lg leading-relaxed mb-10">
+                  DYPIU offers world-class programs across 8 schools. We develop future-ready professionals through a rigorous, modern curriculum and a dynamic learning environment.
                 </p>
-                <div className="space-y-2 sm:space-y-3 mb-4 sm:mb-6">
+                <div className="space-y-4 mb-12">
                   {[
-                    "Engineering, Management, Design & Liberal Arts",
-                    "Industry partnerships with IBM & global leaders",
-                    "PhD programs across multiple disciplines",
+                    "Engineering, Management & Liberal Arts",
+                    "Industry partnerships with global leaders",
+                    "PhD programs across disciplines",
                     "Experiential learning from year one",
                   ].map((item) => (
-                    <div key={item} className="flex items-start gap-2 sm:gap-3">
-                      <span className="material-symbols-outlined text-[14px] sm:text-[16px] text-[#1F7A3E] mt-0.5" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
-                      <span className="text-[13px] sm:text-[14px] text-[#4a5568]">{item}</span>
+                    <div key={item} className="flex items-center gap-4 group/item">
+                      <div className="w-2 h-2 rounded-full bg-blue-500" />
+                      <span className="text-sm font-bold text-[#4a5568] group-hover/item:text-blue-600 transition-colors uppercase tracking-wider">{item}</span>
                     </div>
                   ))}
                 </div>
               </div>
-              <a href="https://www.dypiu.ac.in/admissions" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-[#1F7A3E] font-bold text-[14px] group-hover:gap-3 transition-all">
+              <a href="https://www.dypiu.ac.in/admissions" target="_blank" rel="noopener noreferrer" className="relative z-10 inline-flex items-center gap-4 text-blue-600 font-black text-lg hover:gap-6 transition-all uppercase tracking-widest">
                 Explore Programs
-                <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
+                <span className="material-symbols-outlined">arrow_forward</span>
               </a>
             </div>
 
-            {/* Innovation & Research */}
-            <div className="bg-white rounded-2xl p-5 sm:p-7 md:p-8 shadow-[0_2px_20px_rgba(11,60,111,0.06)] border border-[#e8ecf1] flex flex-col justify-between hover:shadow-[0_4px_32px_rgba(11,60,111,0.10)] transition-shadow duration-300">
-              <div>
-                <div className="w-10 sm:w-12 h-10 sm:h-12 rounded-xl bg-[#F3E8FF] flex items-center justify-center mb-4 sm:mb-5">
-                  <span className="material-symbols-outlined text-[20px] sm:text-[24px] text-[#7C3AED]">biotech</span>
+            {/* Innovation Card (Light Purple Tint) */}
+            <div className="group relative bg-[#fdfaff] rounded-[3rem] p-10 border border-purple-100 shadow-[0_20px_50px_rgba(124,58,237,0.05)] hover:shadow-[0_30px_70px_rgba(124,58,237,0.1)] transition-all duration-700 flex flex-col justify-between">
+              <div className="relative z-10">
+                <div className="w-16 h-16 rounded-2xl bg-white flex items-center justify-center mb-8 border border-purple-100 shadow-lg">
+                  <span className="material-symbols-outlined text-2xl text-purple-600">biotech</span>
                 </div>
-                <h3 className="font-headline text-lg sm:text-xl text-[#0B3C6F] font-bold mb-2">Innovation &amp; Research</h3>
-                <p className="text-[#5a6a7a] text-[13px] sm:text-[14px] leading-relaxed">
-                  Strong research culture with BIRAC E-YUVA recognition. Students shortlisted for prestigious national innovation competitions and awarded Best Research Paper at EAIT 2024 international conference.
+                <h3 className="font-headline text-2xl text-[#0B3C6F] font-bold mb-4">Innovation & Research</h3>
+                <p className="text-[#5a6a7a] text-base leading-relaxed">
+                  Strong research culture with BIRAC E-YUVA recognition. Our students are awarded for Best Research Papers globally.
                 </p>
               </div>
-              <div className="mt-4 sm:mt-5 pt-4 sm:pt-5 border-t border-[#f0f2f5] flex items-center gap-3">
-                <span className="material-symbols-outlined text-[18px] text-[#7C3AED]" style={{ fontVariationSettings: "'FILL' 1" }}>emoji_events</span>
-                <span className="text-[11px] sm:text-[12px] text-[#8a95a3] font-medium">BIRAC E-YUVA Recognized</span>
+              <div className="mt-8 flex items-center gap-3 text-purple-600 font-bold text-xs uppercase tracking-widest">
+                <span className="material-symbols-outlined text-xl">verified_user</span>
+                BIRAC E-YUVA Recognized
               </div>
             </div>
 
-            {/* Industry & Placements */}
-            <div className="bg-white rounded-2xl p-5 sm:p-7 md:p-8 shadow-[0_2px_20px_rgba(11,60,111,0.06)] border border-[#e8ecf1] flex flex-col justify-between hover:shadow-[0_4px_32px_rgba(11,60,111,0.10)] transition-shadow duration-300">
-              <div>
-                <div className="w-10 sm:w-12 h-10 sm:h-12 rounded-xl bg-[#E8F5E9] flex items-center justify-center mb-4 sm:mb-5">
-                  <span className="material-symbols-outlined text-[20px] sm:text-[24px] text-[#1F7A3E]">work</span>
+            {/* Industry Card (Light Teal Tint) */}
+            <div className="group relative bg-[#f4fffb] rounded-[3rem] p-10 border border-teal-100 shadow-[0_20px_50px_rgba(20,184,166,0.05)] hover:shadow-[0_30px_70px_rgba(20,184,166,0.1)] transition-all duration-700 flex flex-col justify-between">
+              <div className="relative z-10">
+                <div className="w-16 h-16 rounded-2xl bg-white flex items-center justify-center mb-8 border border-teal-100 shadow-lg">
+                  <span className="material-symbols-outlined text-2xl text-teal-600">work</span>
                 </div>
-                <h3 className="font-headline text-lg sm:text-xl text-[#0B3C6F] font-bold mb-2">Industry Partnerships</h3>
-                <p className="text-[#5a6a7a] text-[13px] sm:text-[14px] leading-relaxed">
-                  Dedicated Corporate Relations &amp; Placement Cell with comprehensive training in aptitude, communication, and professional development. Students placed at world&apos;s most prestigious companies.
+                <h3 className="font-headline text-2xl text-[#0B3C6F] font-bold mb-4">Industry Partnerships</h3>
+                <p className="text-[#5a6a7a] text-base leading-relaxed">
+                  Dedicated corporate cell with specialized training. Our students are placed at global industry leaders.
                 </p>
               </div>
-              <div className="mt-4 sm:mt-5 pt-4 sm:pt-5 border-t border-[#f0f2f5] flex items-center gap-3">
-                <span className="text-[20px] sm:text-[22px] font-headline font-bold text-[#1F7A3E]">98%</span>
-                <span className="text-[11px] sm:text-[12px] text-[#8a95a3] uppercase tracking-wider font-medium">Placement Rate</span>
+              <div className="mt-8 flex items-center gap-4">
+                <div className="text-4xl font-black text-teal-600 tracking-tighter">98%</div>
+                <div className="h-6 w-[2px] bg-teal-100" />
+                <span className="text-[10px] text-gray-500 uppercase tracking-[0.2em] font-bold">Placement Rate</span>
               </div>
             </div>
 
-            {/* Wide Awards Card */}
-            <div className="lg:col-span-2 bg-[#0B3C6F] rounded-2xl p-6 sm:p-8 md:p-10 shadow-[0_4px_24px_rgba(11,60,111,0.15)]">
-              <div className="flex flex-col md:flex-row items-start md:items-center gap-4 sm:gap-6 md:gap-10 mb-6 sm:mb-8">
+            {/* Premium Dark Awards Card (Preserved High-Premium Design) */}
+            <div className="lg:col-span-2 group relative overflow-hidden bg-[#0A192F] rounded-[3.5rem] p-10 sm:p-14 border border-white/10 shadow-3xl">
+              <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[100px] translate-x-1/4 -translate-y-1/4" />
+
+              <div className="flex flex-col xl:flex-row items-start xl:items-center gap-12 mb-14 relative z-10">
                 <div className="flex-1">
-                  <div className="w-10 sm:w-12 h-10 sm:h-12 rounded-xl bg-white/10 flex items-center justify-center mb-3 sm:mb-4">
-                    <span className="material-symbols-outlined text-[20px] sm:text-[24px] text-[#fbbf24]">emoji_events</span>
+                  <div className="inline-flex items-center gap-3 px-4 py-2 rounded-xl bg-amber-400/10 border border-amber-400/20 mb-6">
+                    <span className="material-symbols-outlined text-amber-400 text-xl">emoji_events</span>
+                    <span className="text-[10px] text-amber-400 uppercase tracking-[0.3em] font-black">Elite Status</span>
                   </div>
-                  <h3 className="font-headline text-xl sm:text-2xl text-white font-bold mb-2">Awards &amp; Recognition</h3>
-                  <p className="text-white/60 text-[13px] sm:text-[14px] leading-relaxed max-w-lg">
-                    DYPIU students and faculty consistently win at national and international levels — from IIT Mumbai poster presentations to ENSIN entrepreneurship awards.
+                  <h3 className="font-headline text-4xl sm:text-5xl text-white font-bold mb-6 tracking-tight">Awards & Recognition</h3>
+                  <p className="text-gray-400 text-lg sm:text-xl leading-relaxed max-w-xl">
+                    Our community consistently excels on global stages—from IIT Mumbai to esteemed International Conferences.
                   </p>
                 </div>
-                <div className="flex items-center gap-6 sm:gap-8">
-                  <div className="text-center">
-                    <span className="text-[28px] sm:text-[36px] font-headline font-bold text-[#fbbf24]">15+</span>
-                    <p className="text-[10px] sm:text-[11px] text-white/50 uppercase tracking-wider font-medium mt-0.5 sm:mt-1">Awards 2024-25</p>
+                <div className="flex items-center gap-10 bg-white/5 p-8 rounded-[2.5rem] border border-white/5 backdrop-blur-md">
+                  <div className="text-center px-4">
+                    <span className="text-5xl font-black text-amber-400">15+</span>
+                    <p className="text-[10px] text-gray-500 uppercase tracking-widest font-bold mt-2">Annual Awards</p>
                   </div>
-                  <div className="w-px h-10 sm:h-12 bg-white/15" />
-                  <div className="text-center">
-                    <span className="text-[28px] sm:text-[36px] font-headline font-bold text-[#66df6e]">8</span>
-                    <p className="text-[10px] sm:text-[11px] text-white/50 uppercase tracking-wider font-medium mt-0.5 sm:mt-1">Schools</p>
+                  <div className="w-[1px] h-12 bg-white/10" />
+                  <div className="text-center px-4">
+                    <span className="text-5xl font-black text-blue-400">8</span>
+                    <p className="text-[10px] text-gray-500 uppercase tracking-widest font-bold mt-2">Schools</p>
                   </div>
                 </div>
               </div>
-              {/* Awards List */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
+
+              {/* Awards Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
                 {[
-                  "First Prize at INNOVFEST 2025 (E-Cell PUMBA, SPPU)",
-                  "Winners at Fyrst Ideation Challenge 2K25 – VIT-AP University",
-                  "Best Research Paper at EAIT 2024 International Conference",
+                  "First Prize at INNOVFEST 2025 (E-Cell PUMBA)",
+                  "Winners at Fyrst Ideation Challenge 2K25",
+                  "Best Research Paper International Conference",
                   "Poster Presentation Award at IIT Mumbai",
                   "Best Delegate at BIZ-MUN, VNIT Nagpur",
                   "Bendre Husain Scholarship Achievement",
-                  "Women Entrepreneurship Enabler Award 2025 — ENSIN Forum",
-                  "Student Innovation Ambassador Award 2025 — ENSIN Forum",
+                  "Women Entrepreneurship Enabler Award 2025",
+                  "Student Innovation Ambassador Award 2025",
                 ].map((award) => (
-                  <div key={award} className="flex items-start gap-2 sm:gap-2.5 bg-white/5 px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl">
-                    <span className="material-symbols-outlined text-[12px] sm:text-[14px] text-[#fbbf24] mt-0.5 shrink-0" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-                    <span className="text-[12px] sm:text-[13px] text-white/80 leading-snug">{award}</span>
+                  <div key={award} className="flex items-center gap-4 bg-white/5 hover:bg-white/10 border border-white/5 px-6 py-5 rounded-[1.5rem] transition-all group/award">
+                    <div className="w-2.5 h-2.5 rounded-full bg-amber-400/50 group-hover/award:bg-amber-400 group-hover/award:scale-125 transition-all" />
+                    <span className="text-sm text-gray-300 font-semibold group-hover/award:text-white transition-colors">{award}</span>
                   </div>
                 ))}
               </div>
             </div>
-
           </div>
         </div>
       </section>
