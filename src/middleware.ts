@@ -1,35 +1,23 @@
-import { withAuth } from "next-auth/middleware";
-import { NextResponse } from "next/server";
+import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
 
-export default withAuth(
-    function middleware(req) {
-        const token = req.nextauth.token;
-        const path = req.nextUrl.pathname;
+const isProtectedRoute = createRouteMatcher([
+    '/instructor(.*)',
+    '/admin(.*)',
+    '/student(.*)',
+    '/courses/manage(.*)'
+]);
 
-        // Protect instructor routes
-        if (path.startsWith("/instructor") && token?.role !== "INSTRUCTOR") {
-            return NextResponse.redirect(new URL("/unauthorized", req.url));
-        }
-
-        // Protect admin routes
-        if (path.startsWith("/admin") && token?.role !== "ADMIN") {
-            return NextResponse.redirect(new URL("/unauthorized", req.url));
-        }
-
-        // Optional: Protect student routes, though they might just be logged-in users
-        if (path.startsWith("/student") && token?.role !== "STUDENT" && token?.role !== "INSTRUCTOR") {
-            return NextResponse.redirect(new URL("/unauthorized", req.url));
-        }
-    },
-    {
-        callbacks: {
-            authorized: ({ token }) => !!token,
-        },
+export default clerkMiddleware(async (auth, req) => {
+    if (isProtectedRoute(req)) {
+        await auth.protect();
     }
-);
+});
 
 export const config = {
-    // NOTE: All dashboard routes temporarily unprotected for UI preview.
-    // Re-add them once your PostgreSQL database is connected and you can log in.
-    matcher: ["/student/:path*", "/courses/manage/:path*"],
+    matcher: [
+        // Skip Next.js internals and static files
+        '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
+        // Always run for API routes
+        '/(api|trpc)(.*)',
+    ],
 };

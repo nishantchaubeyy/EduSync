@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { AnimatedLogo } from "./AnimatedLogo";
+import { SignInButton, UserButton, useAuth } from "@clerk/nextjs";
 
 const navLinks = [
     { href: "/", label: "Dashboard", exact: true },
@@ -15,6 +16,7 @@ const navLinks = [
 export function Navbar() {
     const pathname = usePathname();
     const [mobileOpen, setMobileOpen] = useState(false);
+    const { userId, isLoaded } = useAuth();
 
     // Close mobile menu on route change
     useEffect(() => {
@@ -72,9 +74,18 @@ export function Navbar() {
                         <button className="hidden sm:block text-slate-600 hover:bg-slate-100 p-2 rounded-full transition-all">
                             <span className="material-symbols-outlined">settings</span>
                         </button>
-                        <div className="h-8 w-8 sm:h-10 sm:w-10 rounded-full overflow-hidden bg-surface-container flex items-center justify-center">
-                            <span className="material-symbols-outlined text-slate-500 text-[20px] sm:text-[24px]">person</span>
-                        </div>
+
+                        {isLoaded && userId ? (
+                            <div className="flex items-center justify-center h-8 w-8 sm:h-10 sm:w-10">
+                                <UserButton />
+                            </div>
+                        ) : isLoaded && !userId ? (
+                            <SignInButton mode="modal">
+                                <button className="bg-primary text-white text-xs sm:text-sm font-bold uppercase tracking-widest px-4 py-2 rounded-lg hover:bg-primary-container hover:text-on-primary-container transition-all">
+                                    Sign In
+                                </button>
+                            </SignInButton>
+                        ) : null}
 
                         {/* Hamburger (mobile/tablet) */}
                         <button

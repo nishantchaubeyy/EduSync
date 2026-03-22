@@ -1,6 +1,10 @@
-import Link from "next/link";
+"use client";
 
-const inProgressCourses = [
+import Link from "next/link";
+import { useQuery } from "convex/react";
+import { api } from "../../../convex/_generated/api";
+
+const mockInProgressCourses = [
     { id: "1", title: "Principles of Minimalist Space", category: "Architecture", progress: 72, image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCokAHUhkkZBskDpUB1njCvJfwwdgYG2I8nJ1576JC7q_HKh1aGeld548QujGjFuB900biwaOqTD1mg5AwiQuhajiGzQT9GtIRZjNDuQD3tbfsqRfxbv-ql_IyoC2_l1co_gpH8T2GLCJ92LSEXS3C10wbhNNhqFZ5yrVrG5LxyyWG7-EOUiwiP6PB6i5TNHDAhp6cYjkxyfTYzSzwuTA2JMjWzEPWDXApatIVyWCsI2vT8OuT_DHHHtlLDqPHGoEKyr5B3BRf1kkRb" },
     { id: "2", title: "Data-Driven Growth Strategies", category: "Business", progress: 45, image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAD_LHL4Tp0BmfOr8-m0wVzJC4DZF4pc1nzIe6kM8za8gBBBJapV_dgQqUKUWlWg02DM7YtVKtSxIRaNJfpucCLlwibjEoAii99oJMNUUcNX0JyjupvKgS0I1JiINal5JsaBeSD0MyndiR4gQrHHkGoOe2WP9ZN0OJYnaKwQIBQ_K_nQqjUo_t-gpDGlq7Xr4AJuL9luyz6tysoH1T5rUMbJMIS-JWJxI3L_78mQL7Izc2ndOdkyDhHPkBqrsyLZWxGMI9RyPepSN-y" },
 ];
@@ -25,6 +29,19 @@ const badges = [
 ];
 
 export default function StudentDashboardPage() {
+    const enrollments = useQuery(api.enrollments.getStudentEnrollments);
+
+    // Map Convex enrollments to UI structure, fallback to mock data if empty or loading
+    const inProgressCourses = enrollments && enrollments.length > 0
+        ? enrollments.map(e => ({
+            id: e.courseId,
+            title: typeof e.course === 'object' && e.course !== null ? (e.course as any).title : "Untitled",
+            category: "General",
+            progress: 0,
+            image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCokAHUhkkZBskDpUB1njCvJfwwdgYG2I8nJ1576JC7q_HKh1aGeld548QujGjFuB900biwaOqTD1mg5AwiQuhajiGzQT9GtIRZjNDuQD3tbfsqRfxbv-ql_IyoC2_l1co_gpH8T2GLCJ92LSEXS3C10wbhNNhqFZ5yrVrG5LxyyWG7-EOUiwiP6PB6i5TNHDAhp6cYjkxyfTYzSzwuTA2JMjWzEPWDXApatIVyWCsI2vT8OuT_DHHHtlLDqPHGoEKyr5B3BRf1kkRb"
+        }))
+        : mockInProgressCourses;
+
     return (
         <div className="px-4 sm:px-8 py-6 sm:py-8">
             <div className="max-w-7xl mx-auto">

@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import { useQuery } from "convex/react";
+import { api } from "../../convex/_generated/api";
 
 /* ─── Real DYPIU course data scraped from dypiu.ac.in ─── */
 export interface DYPIUCourse {
@@ -14,9 +16,9 @@ export interface DYPIUCourse {
     icon: string;
 }
 
-type Category = "Sciences" | "Humanities" | "Technology" | "Design" | "Management";
+type Category = "Sciences" | "Humanities" | "Technology" | "Design" | "Management" | "General";
 
-const ALL_CATEGORIES: Category[] = ["Sciences", "Technology", "Management", "Humanities", "Design"];
+const ALL_CATEGORIES: Category[] = ["Sciences", "Technology", "Management", "Humanities", "Design", "General"];
 
 const COURSES: DYPIUCourse[] = [
     // ── School of Computer Science Engineering & Applications (SoCSEA) ──
@@ -283,6 +285,7 @@ const CATEGORY_GRADIENTS: Record<Category, string> = {
     Management: "from-amber-600 to-orange-500",
     Humanities: "from-rose-700 to-pink-500",
     Design: "from-violet-700 to-purple-500",
+    General: "from-slate-700 to-slate-500",
 };
 
 const CATEGORY_COLORS: Record<Category, string> = {
@@ -291,14 +294,35 @@ const CATEGORY_COLORS: Record<Category, string> = {
     Management: "text-amber-700 bg-amber-50 border-amber-200",
     Humanities: "text-rose-700 bg-rose-50 border-rose-200",
     Design: "text-violet-700 bg-violet-50 border-violet-200",
+    General: "text-slate-700 bg-slate-50 border-slate-200",
 };
 
 export default function DYPIUCourseCatalog() {
     const [activeCategory, setActiveCategory] = useState<Category | "All">("All");
     const [searchQuery, setSearchQuery] = useState("");
 
+    const convexCoursesData = useQuery(api.courses.getCourses);
+
+    const ALL_DYNAMIC_COURSES = useMemo(() => {
+        let merged = [...COURSES];
+        if (convexCoursesData && convexCoursesData.length > 0) {
+            const dynamicCourses: DYPIUCourse[] = convexCoursesData.map(c => ({
+                name: c.title,
+                school: "EduSync Platform",
+                category: "General",
+                degree: "Online Course",
+                duration: "Self-Paced",
+                description: c.description,
+                link: `/courses/${c._id}`,
+                icon: "menu_book",
+            }));
+            merged = [...dynamicCourses, ...merged];
+        }
+        return merged;
+    }, [convexCoursesData]);
+
     const filteredCourses = useMemo(() => {
-        return COURSES.filter((course) => {
+        return ALL_DYNAMIC_COURSES.filter((course) => {
             const matchesCategory = activeCategory === "All" || course.category === activeCategory;
             const matchesSearch =
                 searchQuery === "" ||
@@ -308,15 +332,15 @@ export default function DYPIUCourseCatalog() {
                 course.description.toLowerCase().includes(searchQuery.toLowerCase());
             return matchesCategory && matchesSearch;
         });
-    }, [activeCategory, searchQuery]);
+    }, [activeCategory, searchQuery, ALL_DYNAMIC_COURSES]);
 
     const categoryCounts = useMemo(() => {
-        const counts: Record<string, number> = { All: COURSES.length };
+        const counts: Record<string, number> = { All: ALL_DYNAMIC_COURSES.length };
         ALL_CATEGORIES.forEach((cat) => {
-            counts[cat] = COURSES.filter((c) => c.category === cat).length;
+            counts[cat] = ALL_DYNAMIC_COURSES.filter((c) => c.category === cat).length;
         });
         return counts;
-    }, []);
+    }, [ALL_DYNAMIC_COURSES]);
 
     return (
         <section className="py-12 sm:py-24">
@@ -325,7 +349,7 @@ export default function DYPIUCourseCatalog() {
                 <div className="text-center mb-8 sm:mb-12">
                     <h2 className="font-headline text-3xl sm:text-5xl text-primary font-bold mb-3 sm:mb-4">Curated Programs</h2>
                     <p className="text-on-surface-variant max-w-2xl mx-auto text-sm sm:text-lg">
-                        Explore {COURSES.length} programs across {ALL_CATEGORIES.length} disciplines — scraped live from{" "}
+                        Explore {ALL_DYNAMIC_COURSES.length} programs across {ALL_CATEGORIES.length} disciplines — scraped live from{" "}
                         <a href="https://www.dypiu.ac.in" target="_blank" rel="noopener noreferrer" className="text-secondary font-bold hover:underline">
                             dypiu.ac.in
                         </a>
