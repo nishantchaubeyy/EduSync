@@ -12,6 +12,7 @@ export function Navbar() {
 
     return (
         <nav className="app-nav fixed top-0 z-50 w-full bg-[#fcf8ff] shadow-sm">
+            {/* Mobile Header Box */}
             <div className="app-nav-inner app-shell app-shell--wide flex items-center justify-between w-full lg:hidden">
                 <Link href="/" className="app-nav-mobile-brand flex items-center min-w-0">
                     <span className="app-nav-mobile-logo-wrap flex min-w-0 items-center">
@@ -19,6 +20,21 @@ export function Navbar() {
                     </span>
                     <span className="app-nav-mobile-wordmark inline-flex min-w-0 items-center justify-end"><AnimatedLogo /></span>
                 </Link>
+            </div>
+
+            {/* Mobile Auth Strip (Appears below header, taking no horizontal header space) */}
+            <div className="w-full lg:hidden flex justify-end items-center px-4 py-1.5 bg-surface-container-lowest border-t border-outline-variant/30">
+                {isLoaded && userId ? (
+                    <div className="flex items-center justify-center h-6 w-6">
+                        <UserButton />
+                    </div>
+                ) : isLoaded && !userId ? (
+                    <SignInButton mode="modal">
+                        <button className="text-primary text-[10px] sm:text-xs font-bold uppercase tracking-widest hover:underline transition-all flex items-center gap-1">
+                            Sign In <span className="material-symbols-outlined text-[12px]">login</span>
+                        </button>
+                    </SignInButton>
+                ) : null}
             </div>
 
             <div className="app-nav-inner app-shell app-shell--wide hidden lg:flex justify-between items-center w-full">
