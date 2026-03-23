@@ -1,62 +1,48 @@
-import { clerkMiddleware, createRouteMatcher, clerkClient } from '@clerk/nextjs/server';
-import { NextResponse } from 'next/server';
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { NextResponse } from "next/server";
 
-const isProtectedRoute = createRouteMatcher([
-    '/instructor(.*)',
-    '/admin(.*)',
-    '/student(.*)',
-    '/courses/manage(.*)',
-    '/dashboard(.*)'
+const isPublicRoute = createRouteMatcher([
+    "/",
+    "/sign-in(.*)",
+    "/sign-up(.*)",
+    "/api/(.*)",
+    "/clerk(.*)",
 ]);
 
-const isAuthRoute = createRouteMatcher(['/sign-in(.*)', '/sign-up(.*)']);
+const isInstructorRoute = createRouteMatcher(["/instructor(.*)"]);
+const isAdminRoute = createRouteMatcher(["/admin(.*)"]);
 
-/**
- * Checks if the given email corresponds to the allowed college domain.
- */
-function isAllowedDomain(email: string): boolean {
-    const allowedDomain = process.env.NEXT_PUBLIC_ALLOWED_DOMAIN || "@dypiu.ac.in";
-    return email.toLowerCase().endsWith(allowedDomain.toLowerCase());
-}
+export default clerkMiddleware(async (auth, req) => {
+    const { userId, sessionClaims } = await auth();
+    const role = (sessionClaims?.metadata as any)?.role || "STUDENT";
 
-export default clerkMiddleware(async (authFn, req) => {
-    const auth = await authFn();
-    const { userId } = auth;
-
-    // 1. Basic route protection mapping
-    if (isProtectedRoute(req)) {
-        await authFn.protect(); // Halts execution if entirely unauthenticated
+    // 1. Force authentication for non-public routes
+    if (!userId && !isPublicRoute(req)) {
+        return auth().protect();
     }
 
-    // 2. Domain Restriction Check using Clerk API
-    // We only perform this check if the user is authenticated and not on an auth-related route
-    /* 
-    if (userId && !isAuthRoute(req)) {
-        try {
-            const client = await clerkClient();
-            const user = await client.users.getUser(userId);
-            const email = user.emailAddresses?.[0]?.emailAddress;
+    // 2. Logged-in user role routing
+    if (userId) {
+        const pathname = req.nextUrl.pathname;
 
-            if (email && !isAllowedDomain(email)) {
-                console.log(`Blocking unauthorized domain: ${email}`);
-                const signInUrl = new URL('/sign-in', req.url);
-                signInUrl.searchParams.set('error', 'unauthorized_domain');
-                signInUrl.searchParams.set('message', 'Please use your college email to access this platform.');
+        // Prevent Students from accessing Instructor/Admin routes
+        if ((isInstructorRoute(req) || isAdminRoute(req)) && role === "STUDENT") {
+            return NextResponse.redirect(new URL("/dashboard", req.url));
+        }
 
-                return NextResponse.redirect(signInUrl);
-            }
-        } catch (error) {
-            console.error("Middleware domain restriction failed to fetch user:", error);
+        // Prevent Instructors from accessing Admin routes (unless they are admin)
+        if (isAdminRoute(req) && role !== "ADMIN") {
+            return NextResponse.redirect(new URL("/instructor", req.url));
+        }
+
+        // Optional: Redirect signed-in users away from auth pages to their dashboard
+        if (pathname.startsWith("/sign-in") || pathname.startsWith("/sign-up")) {
+            const redirectTarget = role === "INSTRUCTOR" ? "/instructor" : role === "ADMIN" ? "/admin" : "/dashboard";
+            return NextResponse.redirect(new URL(redirectTarget, req.url));
         }
     }
-    */
 });
 
 export const config = {
-    matcher: [
-        // Skip Next.js internals and static files
-        '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
-        // Always run for API routes
-        '/(api|trpc)(.*)',
-    ],
+    matcher: ["/((?!.*\\..*|_next).*)", "/", "/(api|trpc)(.*)"],
 };

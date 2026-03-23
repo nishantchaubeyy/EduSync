@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useClerk, UserButton, useUser } from "@clerk/nextjs";
+import { BrandLogo } from "./BrandLogo";
 
 const navItems = [
     { href: "/dashboard", icon: "dashboard", label: "Dashboard" },
@@ -18,58 +19,66 @@ export function DashboardSidebar() {
     const { signOut } = useClerk();
     const { user, isLoaded } = useUser();
 
+    // Dynamic role display based on route
+    const getRoleLabel = () => {
+        if (pathname.startsWith("/instructor")) return "Curriculum Instructor";
+        if (pathname.startsWith("/admin")) return "Systems Admin";
+        return "Academic Learner";
+    };
+
     return (
-        <aside className="hidden lg:flex h-screen w-64 fixed left-0 top-0 bg-slate-50 flex-col p-6 gap-3 text-sm font-medium z-[999] border-r border-slate-200 shadow-xl transition-all duration-300">
-            <div className="mb-8 px-2 flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-md border border-slate-100 overflow-hidden p-1">
-                        <img src="/image.png" alt="University Logo" className="w-full h-full object-contain" />
+        <aside className="hidden lg:flex h-screen w-72 fixed left-0 top-0 bg-white flex-col p-8 gap-3 text-sm font-medium z-[999] border-r border-slate-100 shadow-2xl shadow-slate-200/20 transition-all duration-300">
+            <div className="mb-12 px-2 flex items-center justify-between">
+                <div className="flex items-center gap-4 group">
+                    <BrandLogo size="md" className="shadow-lg shadow-indigo-500/10 group-hover:rotate-[-8deg]" />
+                    <div>
+                        <span className="text-2xl font-black text-slate-900 font-headline tracking-tighter block leading-none">EduSync</span>
+                        <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mt-1 block opacity-60">Curator</span>
                     </div>
-                    <span className="text-xl font-bold text-primary font-headline">Curator</span>
                 </div>
             </div>
 
-            <nav className="flex-1 space-y-1.5">
+            <nav className="flex-1 space-y-2">
                 {navItems.map((item) => {
                     const isActive = pathname === item.href || (item.href !== "#" && pathname.startsWith(item.href) && item.href !== "/courses");
                     return (
                         <Link
                             key={item.label}
                             href={item.href}
-                            className={`flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-300 select-none ${isActive
-                                ? "bg-slate-50 text-primary shadow-inner border border-slate-200/50"
-                                : "text-slate-500 hover:text-primary hover:bg-slate-50/80"
+                            className={`flex items-center gap-4 px-5 py-4 rounded-2xl transition-all duration-300 select-none ${isActive
+                                ? "bg-slate-900 text-white shadow-xl shadow-slate-900/20 translate-x-1"
+                                : "text-slate-500 hover:text-slate-900 hover:bg-slate-50"
                                 }`}
                         >
-                            <span className={`material-symbols-outlined text-[22px] ${isActive ? 'filled' : ''}`}>{item.icon}</span>
-                            <span className="font-bold tracking-tight">{item.label}</span>
+                            <span className={`material-symbols-outlined text-[24px] ${isActive ? 'filled' : ''}`}>{item.icon}</span>
+                            <span className="font-black tracking-tight text-base">{item.label}</span>
                         </Link>
                     );
                 })}
             </nav>
 
-            <div className="mt-auto pt-6 border-t border-slate-100 space-y-4">
+            <div className="mt-auto pt-8 border-t border-slate-50 space-y-6">
                 {/* User Section */}
-                <div className="flex items-center gap-3 px-2 py-3 bg-slate-50 rounded-2xl border border-slate-100">
-                    {isLoaded && user && <UserButton appearance={{ elements: { userButtonAvatarBox: "h-10 w-10 border-2 border-white shadow-sm" } }} />}
+                <div className="flex items-center gap-4 px-4 py-4 bg-slate-50/50 rounded-[2rem] border border-slate-100 hover:bg-white hover:shadow-xl transition-all duration-300 group">
+                    {isLoaded && user && <UserButton appearance={{ elements: { userButtonAvatarBox: "h-12 w-12 border-4 border-white shadow-md" } }} />}
                     <div className="flex flex-col min-w-0">
-                        <span className="text-xs font-bold text-primary truncate">
+                        <span className="text-sm font-black text-slate-900 truncate tracking-tight">
                             {user?.firstName || user?.username || "Learner"}
                         </span>
-                        <span className="text-[10px] text-slate-400 truncate opacity-80 uppercase tracking-tighter">
-                            Active Student
+                        <span className="text-[10px] text-slate-400 truncate font-black uppercase tracking-[0.1em] mt-0.5">
+                            {getRoleLabel()}
                         </span>
                     </div>
                 </div>
 
-                <div className="space-y-1">
+                <div className="px-2">
                     {isLoaded && user && (
                         <button
                             onClick={() => signOut({ redirectUrl: "/" })}
-                            className="w-full text-left flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-primary hover:bg-slate-50 transition-all duration-300 rounded-xl group"
+                            className="w-full text-left flex items-center gap-4 px-5 py-4 text-slate-400 hover:text-error hover:bg-error/5 transition-all duration-300 rounded-2xl group"
                         >
-                            <span className="material-symbols-outlined text-[22px] group-hover:rotate-12 transition-transform">logout</span>
-                            <span className="font-bold tracking-tight">Logout</span>
+                            <span className="material-symbols-outlined text-[24px] group-hover:rotate-12 transition-transform">logout</span>
+                            <span className="font-black tracking-tight text-base">Terminate Session</span>
                         </button>
                     )}
                 </div>
