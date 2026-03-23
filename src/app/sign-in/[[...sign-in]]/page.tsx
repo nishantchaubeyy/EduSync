@@ -9,7 +9,7 @@ function SignInContent() {
     const searchParams = useSearchParams();
     const { isSignedIn } = useAuth();
     const errorMsg = searchParams.get("message");
-    const redirectUrl = searchParams.get("redirect_url") || "/instructor/courses";
+    const redirectUrl = searchParams.get("redirect_url") || "/dashboard";
 
     useEffect(() => {
         if (isSignedIn) {
@@ -36,7 +36,7 @@ function SignInContent() {
         <div className="flex flex-col min-h-screen items-center justify-center p-6 bg-slate-50/50">
             <div className="w-full max-w-md bg-white p-10 rounded-[3rem] shadow-2xl shadow-slate-200/60 border border-slate-100 flex flex-col items-center relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-50/50 rounded-full blur-3xl -translate-y-12 translate-x-12" />
-                
+
                 <div className="mb-10 flex flex-col items-center relative z-10 text-center">
                     <BrandLogo size="lg" className="mb-6 shadow-indigo-500/20 shadow-xl border-white/5 bg-indigo-950" />
                     <h1 className="text-4xl font-black text-slate-900 tracking-tighter leading-none mb-2">Welcome to EduSync</h1>
@@ -77,7 +77,7 @@ function SignInContent() {
                     </p>
                 </div>
             </div>
-            
+
             <p className="mt-10 text-[9px] text-slate-400 max-w-xs text-center font-bold tracking-[0.1em] opacity-60 uppercase">
                 EduSync Curriculum Protocol v2.4.1
             </p>

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useClerk, UserButton, useUser } from "@clerk/nextjs";
 import { BrandLogo } from "./BrandLogo";
+import { StaticBrandLogo } from "./StaticBrandLogo";
 
 const navItems = [
     { href: "/dashboard", icon: "dashboard", label: "Dashboard" },
@@ -32,8 +33,8 @@ export function DashboardSidebar() {
                 <div className="flex items-center gap-4 group">
                     <BrandLogo size="md" className="shadow-lg shadow-indigo-500/10 group-hover:rotate-[-8deg]" />
                     <div>
-                        <span className="text-2xl font-black text-slate-900 font-headline tracking-tighter block leading-none">EduSync</span>
-                        <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mt-1 block opacity-60">Curator</span>
+                        <StaticBrandLogo size="md" className="block leading-none" />
+                        <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mt-1 block opacity-60">Curator Node</span>
                     </div>
                 </div>
             </div>

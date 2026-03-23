@@ -42,7 +42,7 @@ export default function LandingPage() {
                 Explore Programs
                 <span className="material-symbols-outlined text-xl group-hover:translate-x-1 transition-transform">arrow_forward</span>
               </Link>
-              <Link href="/login" className="bg-[#0f172a]/60 backdrop-blur-md hover:bg-[#0f172a]/80 text-white px-8 sm:px-12 py-4 sm:py-5 rounded-xl font-bold transition-all text-center text-sm sm:text-base border border-white/10">
+              <Link href="/sign-in" className="bg-[#0f172a]/60 backdrop-blur-md hover:bg-[#0f172a]/80 text-white px-8 sm:px-12 py-4 sm:py-5 rounded-xl font-bold transition-all text-center text-sm sm:text-base border border-white/10">
                 Virtual Campus Tour
               </Link>
             </div>

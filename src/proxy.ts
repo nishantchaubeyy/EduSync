@@ -26,6 +26,12 @@ export default clerkMiddleware(async (auth, req) => {
     if (userId) {
         const pathname = req.nextUrl.pathname;
 
+        // Redirect from / (Home) to dashboard if signed in
+        if (pathname === "/") {
+            const redirectTarget = role === "INSTRUCTOR" ? "/instructor" : role === "ADMIN" ? "/admin" : "/dashboard";
+            return NextResponse.redirect(new URL(redirectTarget, req.url));
+        }
+
         // Prevent Students from accessing Instructor/Admin routes
         if ((isInstructorRoute(req) || isAdminRoute(req)) && role === "STUDENT") {
             return NextResponse.redirect(new URL("/dashboard", req.url));
