@@ -1,7 +1,7 @@
 "use client";
 
 import { useQuery } from "convex/react";
-import { api } from "../../../convex/_generated/api";
+import { api } from "@convex/_generated/api";
 import { useUser } from "@clerk/nextjs";
 import Link from "next/link";
 import { Loader2, Plus, Users, BookOpen, GraduationCap, ArrowUpRight, LayoutDashboard, FileText } from "lucide-react";
@@ -19,7 +19,7 @@ export default function InstructorDashboardPage() {
         );
     }
 
-    const totalStudents = courses?.reduce((acc, c) => acc + (c.studentCount || 0), 0) || 0;
+    const totalStudents = courses?.reduce((acc, c) => acc + (c._count.enrollments || 0), 0) || 0;
     const activeCourses = courses?.length || 0;
 
     return (
@@ -151,7 +151,7 @@ function CourseCardSmall({ course }: { course: any }) {
             </div>
             <h4 className="font-black text-slate-900 text-lg leading-tight mb-2 truncate group-hover:text-indigo-600 transition-colors">{course.title}</h4>
             <div className="mt-auto pt-4 flex items-center justify-between text-[10px] font-black uppercase tracking-widest text-slate-400">
-                <span>{course.studentCount || 0} Learners</span>
+                <span>{course._count.enrollments || 0} Learners</span>
                 <span className="text-indigo-400 group-hover:translate-x-1 transition-transform">View →</span>
             </div>
         </Link>

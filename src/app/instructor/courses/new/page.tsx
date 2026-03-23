@@ -1,7 +1,7 @@
 "use client";
 
 import { useMutation } from "convex/react";
-import { api } from "../../../../convex/_generated/api";
+import { api } from "@convex/_generated/api";
 import { ArrowLeft, Send, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";

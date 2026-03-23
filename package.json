@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev -H 127.0.0.1",
-    "postinstall": "prisma generate",
+    "postinstall": "prisma generate && npx convex dev --once || true",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"

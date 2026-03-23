@@ -1,12 +1,12 @@
 "use client";
 
 import { useQuery } from "convex/react";
-import { api } from "../../../../../convex/_generated/api";
+import { api } from "@convex/_generated/api";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Plus, Settings, CheckCircle, Loader2 } from "lucide-react";
 import { use } from "react";
-import { Id } from "../../../../../convex/_generated/dataModel";
+import { Id } from "@convex/_generated/dataModel";
 
 export default function CourseDetailPage({ params: paramsPromise }: { params: Promise<{ courseId: string }> }) {
     const params = use(paramsPromise);

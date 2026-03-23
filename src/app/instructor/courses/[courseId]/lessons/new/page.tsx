@@ -1,12 +1,12 @@
 "use client";
 
 import { useMutation } from "convex/react";
-import { api } from "../../../../../../convex/_generated/api";
+import { api } from "@convex/_generated/api";
 import { ArrowLeft, Send, Loader2, Video } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, use } from "react";
-import { Id } from "../../../../../../convex/_generated/dataModel";
+import { Id } from "@convex/_generated/dataModel";
 
 export default function NewLessonPage({ params: paramsPromise }: { params: Promise<{ courseId: string }> }) {
     const params = use(paramsPromise);
