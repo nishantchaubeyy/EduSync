@@ -13,25 +13,23 @@ const isInstructorRoute = createRouteMatcher(["/instructor(.*)"]);
 const isAdminRoute = createRouteMatcher(["/admin(.*)"]);
 
 export default clerkMiddleware(async (auth, req) => {
-    // 1. Force authentication for non-public routes
+    // 1. Global redirect from /home to root
+    const pathname = req.nextUrl.pathname;
+    if (pathname === "/home") {
+        return NextResponse.redirect(new URL("/", req.url));
+    }
+
+    // 2. Force authentication for non-public routes
     if (!isPublicRoute(req)) {
         await auth.protect();
     }
 
-    // 2. Retrieve session data for role-based routing
+    // 3. Retrieve session data for role-based routing
     const { userId, sessionClaims } = await auth();
     const role = (sessionClaims?.metadata as any)?.role || "STUDENT";
 
-    // 3. Logged-in user role routing
+    // 4. Logged-in user role routing
     if (userId) {
-        const pathname = req.nextUrl.pathname;
-
-        // Redirect from / (Home) to dashboard if signed in
-        if (pathname === "/") {
-            const redirectTarget = role === "INSTRUCTOR" ? "/instructor" : role === "ADMIN" ? "/admin" : "/dashboard";
-            return NextResponse.redirect(new URL(redirectTarget, req.url));
-        }
-
         // Prevent Students from accessing Instructor/Admin routes
         if ((isInstructorRoute(req) || isAdminRoute(req)) && role === "STUDENT") {
             return NextResponse.redirect(new URL("/dashboard", req.url));
