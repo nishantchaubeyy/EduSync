@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Providers } from "@/components/Providers";
-import { AppFrame } from "@/components/AppFrame";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,6 +16,10 @@ export const metadata: Metadata = {
   title: "EduSync | The Digital Curator of Higher Learning",
   description: "Navigate the future of academia with EduSync. We curate the intellectual journey of tomorrow's leaders.",
 };
+
+import { Providers } from "@/components/Providers";
+import { AppFrame } from "@/components/AppFrame";
+import { SidebarProvider } from "@/components/SidebarContext";
 
 export default function RootLayout({
   children,
@@ -36,7 +38,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background min-h-screen text-on-surface font-body selection:bg-tertiary-fixed selection:text-on-tertiary-fixed`}
       >
         <Providers>
-          <AppFrame>{children}</AppFrame>
+          <SidebarProvider>
+            <AppFrame>{children}</AppFrame>
+          </SidebarProvider>
         </Providers>
       </body>
     </html>

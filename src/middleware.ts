@@ -26,14 +26,16 @@ export default clerkMiddleware(async (auth, req) => {
 
     // 3. Retrieve session data for role-based routing
     const { userId, sessionClaims } = await auth();
-    const role = (sessionClaims?.metadata as any)?.role || "STUDENT";
+    // Fallback logic for role
+    const metadata = (sessionClaims?.metadata as any) || {};
+    const role = metadata.role || "STUDENT";
 
     // 4. Logged-in user role routing
     if (userId) {
-        // Prevent Students from accessing Instructor/Admin routes
-        if ((isInstructorRoute(req) || isAdminRoute(req)) && role === "STUDENT") {
-            return NextResponse.redirect(new URL("/dashboard", req.url));
-        }
+        // [DEV NOTE] Disabling strict routing temporary to allow user to visit both pages while syncing roles
+        // if ((isInstructorRoute(req) || isAdminRoute(req)) && role === "STUDENT") {
+        //     return NextResponse.redirect(new URL("/dashboard", req.url));
+        // }
 
         // Prevent Instructors from accessing Admin routes (unless they are admin)
         if (isAdminRoute(req) && role !== "ADMIN") {

@@ -16,14 +16,22 @@ function usesSectionNavigation(pathname: string): boolean {
   );
 }
 
+import { useSidebar } from "./SidebarContext";
+
 export function AppFrame({ children }: { children: ReactNode }) {
   const pathname = usePathname();
-  const showGlobalNavbar = !usesSectionNavigation(pathname);
+  const { isOpen } = useSidebar();
+  // Always show Global Navbar so users can go back Home easily,
+  // but we can adjust CSS padding based on role-based sidebars.
+  const isDashboard = pathname.startsWith("/dashboard") || pathname.startsWith("/instructor") || pathname.startsWith("/admin");
 
   return (
     <>
-      {showGlobalNavbar ? <Navbar /> : null}
-      <main className={showGlobalNavbar ? "app-main min-h-screen" : "min-h-screen"}>
+      <Navbar />
+      <main
+        className={`app-main min-h-screen transition-all duration-500 ease-in-out ${isDashboard ? (isOpen ? 'lg:pl-72' : 'lg:pl-24') : ''}`}
+        style={{ paddingTop: '80px' }} // Navbar height
+      >
         {children}
       </main>
       <MobileBottomNav />

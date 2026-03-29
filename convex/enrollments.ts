@@ -64,3 +64,38 @@ export const enrollInCourse = mutation({
         });
     },
 });
+export const getStudentStats = query({
+    args: {},
+    handler: async (ctx) => {
+        const identity = await ctx.auth.getUserIdentity();
+        if (!identity) return null;
+
+        const user = await ctx.db
+            .query("users")
+            .withIndex("by_clerkId", (q) => q.eq("clerkId", identity.subject))
+            .first();
+
+        if (!user) return null;
+
+        const enrollments = await ctx.db
+            .query("enrollments")
+            .withIndex("by_student", (q) => q.eq("studentId", user._id))
+            .collect();
+
+        const progress = await ctx.db
+            .query("progress")
+            .withIndex("by_student", (q) => q.eq("studentId", user._id))
+            .collect();
+
+        const totalCourses = enrollments.length;
+        const completedCourses = progress.filter((p) => p.completed).length; // simple lesson-based approx for now
+
+        return {
+            totalCourses,
+            completedCourses,
+            inProgressCourses: totalCourses - (completedCourses > totalCourses ? totalCourses : completedCourses),
+            totalLearningHours: Math.floor(progress.length * 0.5), // approx 30 mins per lesson
+            averageCompletion: totalCourses > 0 ? (completedCourses / (totalCourses * 10)) * 100 : 0, // mock calculation
+        };
+    },
+});
