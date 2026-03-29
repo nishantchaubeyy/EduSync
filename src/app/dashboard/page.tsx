@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useQuery } from "convex/react";
 import { useUser } from "@clerk/nextjs";
-import { api } from "../../../convex/_generated/api";
+import { api } from "@convex/_generated/api";
 import { BookOpen, Clock } from "lucide-react";
 
 export default function StudentDashboardPage() {

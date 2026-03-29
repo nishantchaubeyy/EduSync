@@ -1,11 +1,11 @@
 "use client";
 
 import { useQuery, useMutation } from "convex/react";
-import { api } from "../../../../../../convex/_generated/api";
+import { api } from "@convex/_generated/api";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, CheckCircle, PlayCircle, Loader2, ChevronRight, ChevronLeft } from "lucide-react";
-import { Id } from "../../../../../../convex/_generated/dataModel";
+import { Id } from "@convex/_generated/dataModel";
 import { useState } from "react";
 
 export default function LessonPage() {

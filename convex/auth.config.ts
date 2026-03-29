@@ -1,8 +1,8 @@
+// Convex auth configuration for Clerk integration
 export default {
   providers: [
     {
-      // Updated to match your Clerk Dashboard screenshot
-      domain: "https://star-terrapin-90.clerk.accounts.dev",
+      domain: "https://discrete-bird-31.clerk.accounts.dev",
       applicationID: "convex",
     },
   ],

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatedLogo } from "./AnimatedLogo";
-import { SignInButton, UserButton, useAuth } from "@clerk/nextjs";
+import { SignUpButton, UserButton, useAuth } from "@clerk/nextjs";
 import { appNavLinks } from "./app-nav-links";
 import { useSidebar } from "./SidebarContext";
 
@@ -84,14 +84,14 @@ export function Navbar() {
                                 <UserButton appearance={{ elements: { userButtonAvatarBox: "h-10 w-10 shadow-lg border-2 border-white ring-2 ring-indigo-50/50" } }} />
                             </div>
                         ) : isLoaded && !userId ? (
-                            <SignInButton mode="modal">
+                            <SignUpButton mode="modal">
                                 <button className="relative group bg-slate-900 overflow-hidden px-8 py-3 rounded-2xl border border-slate-950/20 transition-all duration-500 hover:shadow-[0_12px_24px_rgba(79,70,229,0.15)] active:scale-95">
                                     <div className="absolute inset-0 bg-indigo-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
                                     <span className="relative z-10 text-white font-black uppercase tracking-[0.15em] text-[11px] sm:text-xs">
-                                        Identify
+                                        Sign Up
                                     </span>
                                 </button>
-                            </SignInButton>
+                            </SignUpButton>
                         ) : (
                             <div className="w-24 h-11 bg-slate-50 rounded-2xl animate-pulse ring-1 ring-slate-100" />
                         )}

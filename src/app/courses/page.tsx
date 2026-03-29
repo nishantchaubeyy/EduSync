@@ -1,7 +1,7 @@
 "use client";
 
 import { useQuery } from "convex/react";
-import { api } from "../../../convex/_generated/api";
+import { api } from "@convex/_generated/api";
 import Link from "next/link";
 import { BookOpen, Users, Star, ArrowRight, Loader2, Search, Filter } from "lucide-react";
 import { useState } from "react";
