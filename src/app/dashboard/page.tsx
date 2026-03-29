@@ -34,7 +34,9 @@ export default function StudentDashboardPage() {
             title: typeof e.course === 'object' && e.course !== null ? (e.course as any).title : "Course",
             category: "Enrolling",
             progress: Math.floor(Math.random() * 80) + 10,
-            image: (typeof e.course === 'object' && e.course?.image) ? (e.course as any).image : "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&h=300&fit=crop"
+            image: (typeof e.course === 'object' && e.course !== null && 'image' in e.course && e.course.image)
+                ? (e.course as any).image
+                : "https://images.unsplash.com/photo-1523050335102-c325091d53fb?q=80&w=800&auto=format&fit=crop"
         }))
         : [];
 
@@ -51,7 +53,7 @@ export default function StudentDashboardPage() {
                             Hello, {firstName}!
                         </h1>
                         <p className="text-sm sm:text-base opacity-90 font-body mb-6 sm:mb-8 max-w-2xl">
-                            {enrollments.length > 0 
+                            {enrollments.length > 0
                                 ? `You're enrolled in ${enrollments.length} course${enrollments.length > 1 ? 's' : ''}. Keep up the great work!`
                                 : "Ready to start learning? Explore courses and enroll in ones that interest you."}
                         </p>
@@ -98,16 +100,16 @@ export default function StudentDashboardPage() {
                         {inProgressCourses.length > 0 ? (
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                                 {inProgressCourses.map((course) => (
-                                    <Link 
+                                    <Link
                                         key={course.id}
                                         href={`/courses/${course.id}`}
                                         className="group bg-white border border-slate-100 rounded-3xl shadow-sm hover:shadow-lg hover:border-primary/20 transition-all duration-300 overflow-hidden flex flex-col h-full"
                                     >
                                         <div className="relative overflow-hidden rounded-t-3xl h-40 sm:h-48">
-                                            <img 
-                                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                                                src={course.image} 
-                                                alt={course.title} 
+                                            <img
+                                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                                src={course.image}
+                                                alt={course.title}
                                             />
                                             <div className="absolute top-3 left-3 bg-white text-primary px-3 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider shadow-md">
                                                 {course.category}
@@ -123,9 +125,9 @@ export default function StudentDashboardPage() {
                                                     <span className="text-[10px] sm:text-xs font-bold text-secondary">{course.progress}%</span>
                                                 </div>
                                                 <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
-                                                    <div 
-                                                        className="h-full bg-gradient-to-r from-secondary to-secondary/70 rounded-full transition-all duration-1000" 
-                                                        style={{ width: `${course.progress}%` }} 
+                                                    <div
+                                                        className="h-full bg-gradient-to-r from-secondary to-secondary/70 rounded-full transition-all duration-1000"
+                                                        style={{ width: `${course.progress}%` }}
                                                     />
                                                 </div>
                                             </div>
@@ -138,8 +140,8 @@ export default function StudentDashboardPage() {
                                 <BookOpen className="w-12 sm:w-16 h-12 sm:h-16 text-slate-300 mx-auto mb-4" />
                                 <p className="text-sm sm:text-base font-bold text-slate-600 mb-1">No courses yet</p>
                                 <p className="text-xs sm:text-sm text-slate-400 mb-4">Start exploring courses to enhance your learning</p>
-                                <Link 
-                                    href="/courses" 
+                                <Link
+                                    href="/courses"
                                     className="inline-block px-4 sm:px-6 py-2 sm:py-2.5 bg-primary text-white font-bold rounded-xl hover:opacity-90 transition-all text-sm sm:text-base"
                                 >
                                     Browse Courses
@@ -179,13 +181,13 @@ export default function StudentDashboardPage() {
                     <section className="bg-gradient-to-br from-primary to-primary-container text-white rounded-3xl p-6 sm:p-8 shadow-lg">
                         <h3 className="text-lg sm:text-xl font-bold font-headline mb-4">Quick Actions</h3>
                         <div className="space-y-3">
-                            <Link 
+                            <Link
                                 href="/courses"
                                 className="block w-full px-4 py-3 bg-white/15 hover:bg-white/25 rounded-xl font-bold text-sm transition-all text-center border border-white/10 hover:border-white/30"
                             >
                                 Browse All Courses
                             </Link>
-                            <Link 
+                            <Link
                                 href="/resources"
                                 className="block w-full px-4 py-3 bg-white/15 hover:bg-white/25 rounded-xl font-bold text-sm transition-all text-center border border-white/10 hover:border-white/30"
                             >

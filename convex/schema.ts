@@ -12,6 +12,7 @@ export default defineSchema({
     courses: defineTable({
         title: v.string(),
         description: v.string(),
+        image: v.optional(v.string()), // Hero image for the course
         instructorId: v.id("users"), // Reference to the users table
     }).index("by_instructor", ["instructorId"]),
 
